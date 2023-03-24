@@ -1,0 +1,111 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss"
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100;200;300;400;500;600;700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap')
+
+\:root
+  --font-title: 'Antonio', sans-serif
+  --font-default: 'Work Sans', sans-serif
+
+$my-orange: #ec6136
+
+body, html
+  width: 100%
+  height: 100%
+  overflow-x: hidden
+
+
+body
+  margin: 0
+  background-color: $yellow-200 !important
+
+
+h1, h2, h3
+  font-family: var(--font-title)
+
+
+p, a, span
+  font-family: var(--font-default)
+
+
+header h3
+  color: #fff
+  margin: 0 0 0 20px
+  font-family: var(--font-default)
+  font-weight: 400
+
+
+.header-top
+  height: 50px
+
+.div-logo
+  width: 80%
+
+.logo-iss
+  display: none
+
+@media (max-width: 767.98px)
+  .div-logo
+    width: 90%
+
+  .logo-gars
+    display: none
+
+  .logo-iss
+    display: inline
+
+  .login-div
+    min-width: 90%
+
+  .login-symbol
+    max-width: 150px !important
+
+  .div-btm
+    margin-bottom: 30px !important
+
+.login-div
+  max-width: 60%
+  background-color: #ffffff !important
+  border-radius: 20px
+
+.login-symbol
+  max-width: 250px
+
+.div-input
+  width: 80%
+
+.div-forgotpass a, .div-input label, .div-buttons button
+  font-family: var(--font-title) !important
+
+.div-input
+  input
+    border: none
+    outline: none
+    border-bottom: 2px solid #cccccc
+    font-family: var(--font-default)
+
+  input ~ label
+    color: #cccccc
+
+  input:focus
+    border-bottom: 2px solid #1d1d1d
+
+    ~ label
+      color: #1d1d1d
+
+  input:valid
+    border-bottom: 2px solid #1d1d1d
+
+    ~ label
+      color: #1d1d1d
+
+.div-btm
+  min-width: 80%
+  margin-bottom: 40px
+
+  .div-forgotpass a
+    color: #1d1d1d
+
+.menu-background
+  max-width: 90%
+  background-color: #ffffff
+  border-radius: 20px
+
