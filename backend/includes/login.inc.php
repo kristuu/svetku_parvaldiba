@@ -6,9 +6,9 @@ if (isset($_POST["submit"])) {
     $password = $_POST["password"];
 
     // Instantiate LoginContr class
-    include "../classes/dbh.classes.php";
-    include "../classes/login.classes.php";
-    include "../classes/login-contr.classes.php";
+    include "../classes/Dbh.php";
+    include "../classes/Login.php";
+    include "../controllers/login-contr.classes.php";
     $login = new LoginContr($email, $password);
 
     // Running error handlers and user login

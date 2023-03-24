@@ -1,5 +1,9 @@
 <?php
 
+namespace backend\classes;
+
+use Dbh;
+
 class Login extends Dbh
 {
     protected function getUser($email, $password)

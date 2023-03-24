@@ -3,7 +3,7 @@
 class Dbh
 {
     private static Dbh $instance;
-    public object $_results;
+    public array $_results;
 
     // most recent query statement
     private PDO $connection;

@@ -1,5 +1,7 @@
 <?php
 
+use backend\classes\Login;
+
 class LoginContr extends Login
 {
     private string $email;

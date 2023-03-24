@@ -1,6 +1,5 @@
 <?php
-include '../backend/auth-check.php';
-include '../backend/classes/participant.classes.php';
+require_once '../backend/core/init.php';
 ?>
 
 <!DOCTYPE html>
