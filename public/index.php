@@ -5,6 +5,7 @@ if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
 }
 $user = new Participant();
+$collective = new Collective();
 ?>
 
 <!DOCTYPE html>
@@ -31,8 +32,16 @@ $user = new Participant();
         <div class="my-3 w-75 text-start">
             <h1 style="font-family: var(--font-default);">Esi piekļuvis sistēmai kā <?=$user->getData()->FName . ' ' . $user->getData()->LName?></h1>
             <h3>Piesaistītie kolektīvi:</h3>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><?= ?></li>
+            <ul class="list-group list-group-flush" style="font-family: var(--font-default);">
+                <?php
+                $participants = $collective->getCollectiveParticipants(3);
+                foreach ($participants as $key1 => $value1) {
+                    foreach ($value1 as $key2 => $value2) {
+                        echo "<li class='list-group-item'>$value2</li>";
+                    }
+                }
+                ?>
+                <li class="list-group-item"></li>
             </ul>
         </div>
     </div>
