@@ -13,10 +13,10 @@ $user = new Participant();
                 <div class="navbar-collapse collapse" id="navbar" style>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Sākums</a>
+                            <a class="nav-link active" aria-current="page" href="index.php">Sākums</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Mani dati</a>
+                            <a class="nav-link active" aria-current="page" href="about_me.php">Mani dati</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Palīdzība</a>

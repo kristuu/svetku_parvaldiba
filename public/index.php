@@ -4,8 +4,8 @@ require_once '../backend/core/init.php';
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
 }
-$user = new Participant();
-$collective = new Collective();
+$participant = new Participant();
+$participCollectives = new ParticipCollectives();
 ?>
 
 <!DOCTYPE html>
@@ -30,18 +30,25 @@ $collective = new Collective();
             <img class="logo-iss img-fluid" src="../resources/img/logo-kompakts.svg"/>
         </div>
         <div class="my-3 w-75 text-start">
-            <h1 style="font-family: var(--font-default);">Esi piekļuvis sistēmai kā <?=$user->getData()->FName . ' ' . $user->getData()->LName?></h1>
+            <h1 style="font-family: var(--font-default);">Esi piekļuvis sistēmai kā <?=$participant->getData()->FName . ' ' . $user->getData()->LName?></h1>
             <h3>Piesaistītie kolektīvi:</h3>
             <ul class="list-group list-group-flush" style="font-family: var(--font-default);">
                 <?php
-                $participants = $collective->getCollectiveParticipants(3);
-                foreach ($participants as $key1 => $value1) {
-                    foreach ($value1 as $key2 => $value2) {
-                        echo "<li class='list-group-item'>$value2</li>";
+                $participants = $participCollectives->getParticipantsCollectives(1);
+                foreach ($participants as $objectKey => $object) {
+                    foreach ($object as $key => $value) {
+                        if ($key === "CollectiveName") {
+                            echo "<li class='list-group-item'>$value";
+                        }
+                        if ($key === "MainCollective" && $value) {
+                            echo " | <strong>GALVENAIS</strong></li>";
+                        }
+                        if ($key === "MainCollective" && !$value) {
+                            echo "</li>";
+                        }
                     }
                 }
                 ?>
-                <li class="list-group-item"></li>
             </ul>
         </div>
     </div>

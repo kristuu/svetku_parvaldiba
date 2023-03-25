@@ -4,6 +4,7 @@ class Participant
 {
     private Dbh $_DB;
     private $_data;
+    private $_queryData;
     private bool $_isLoggedIn = false;
 
     public function __construct($user = null) {
@@ -53,6 +54,13 @@ class Participant
         return $this->_data;
     }
 
+    public function update(array $data, int $id = null) {
+        if (!$id && isset($_SESSION["user_id"])) {
+            $id = $_SESSION["user_id"];
+        }
+
+        $this->_DB->update('participants', $data, array('UserID' => $id));
+    }
 }
 
 /*
