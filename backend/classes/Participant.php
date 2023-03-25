@@ -42,6 +42,15 @@ class Participant
         return FALSE;
     }
 
+    public function getAllUsers() {
+        $data = $this->_DB->get('participants');
+        if ($data->count()) {
+            $this->_queryData = $data->_results;
+            return $this->_queryData;
+        }
+        return 'No participants in table.';
+    }
+
     public function exists() {
         return !empty($this->_data);
     }

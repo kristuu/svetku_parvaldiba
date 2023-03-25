@@ -33,9 +33,11 @@ $user = new Participant();
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Pārvaldība</a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="#">Kolektīvi</a>
-                                        <a class="dropdown-item" href="#">Ēdināšanas vietas</a>
-                                        <a class="dropdown-item" href="#">Dislokācijas vietas</a>
+                                        <a class="dropdown-item" href="../backend/admin/collectives.php">Kolektīvi</a>
+                                        <a class="dropdown-item" href="../backend/admin/participants.php">Dalībnieki</a>
+                                        <a class="dropdown-item" href="../backend/admin/categories.php">Kategorijas</a>
+                                        <a class="dropdown-item" href="../backend/admin/participCollectives.php">Dalībnieku saistījums ar kolektīviem</a>
+                                        <a class="dropdown-item" href="../backend/admin/regions.php">Reģioni</a>
                                     </li>
                                 </ul>
                             </li>

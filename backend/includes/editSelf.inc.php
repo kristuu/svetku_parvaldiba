@@ -16,9 +16,9 @@ if (isset($_POST["submitSelfEdit"])) {
 
     // Update database query
     $participant = new Participant();
-    $collective = new Collective();
+    $participCollectives = new ParticipCollectives();
     $participant->update($data);
-    $collective->updateParticipantsMainCollective($collectiveID);
+    $participCollectives->updateParticipantsMainCollective($collectiveID);
 
 
     // Going back to front page
