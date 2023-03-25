@@ -1,9 +1,5 @@
 <?php
 
-namespace backend\classes;
-
-use Dbh;
-
 class Login extends Dbh
 {
     protected function getUser($email, $password)
@@ -32,7 +28,7 @@ class Login extends Dbh
             exit();
         } else {
             $conn = self::getInstance()->getConnection();
-            $stmt = $conn->prepare('SELECT * FROM participants WHERE Email = ? OR Phone = ? AND Password = ?;');
+            $stmt = $conn->prepare('SELECT * FROM participants WHERE (Email = ? OR Phone = ?) AND Password = ?;');
 
             if (!$stmt->execute(array($email, $email, $passwordHashed[0]["Password"]))) {
                 $stmt = null;
@@ -50,8 +46,7 @@ class Login extends Dbh
 
 
             session_start();
-            $_SESSION["usersfname"] = $user[0]["FName"];
-            $_SESSION["isLoggedIn"] = TRUE;
+            $_SESSION["user_id"] = $user[0]["UserID"];
             if ($user[0]["Organiser"] === 1) {
                 $_SESSION["Organiser"] = TRUE;
             } else {

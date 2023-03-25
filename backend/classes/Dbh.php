@@ -51,7 +51,7 @@ class Dbh
         return $this;
     }
 
-    protected function query(string $sql, $conditions = array()): Dbh
+    protected function query(string $sql, $conditions = array())
     {
         $this->_error = FALSE;
 
@@ -77,21 +77,30 @@ class Dbh
         return $this;
     }
 
-    public function get(string $table, string $column = '*', array $conditions = array())
+    public function get(string $table, array $conditions = array(), string $column = '*', string $join = '')
     {
         $where = '';
 
         if (count($conditions)) {
             $where = 'WHERE ';
 
-            foreach ($conditions as $key => $value) {
-                $where .= "$key = ? AND ";
+            foreach ($conditions as $key => $condition) {
+                // check if the condition is an array with two elements (e.g., ['age', '>', 30])
+                if (is_array($condition) && count($condition) == 2) {
+                    // use the comparison operator in the condition
+                    $where .= "$key {$condition[0]} ? AND ";
+                } else {
+                    // use the default equality operator
+                    $where .= "$key = ? AND ";
+                    $condition = array($condition);
+                }
+                $conditions[$key] = $condition[0]; // extract the value from the condition array
             }
 
             $where = substr($where, 0, -5); // remove the last 'AND '
         }
 
-        $sql = "SELECT $column FROM $table $where";
+        $sql = "SELECT $column FROM $table $join $where";
 
         $parameters = array_values($conditions);
 
@@ -100,7 +109,9 @@ class Dbh
         return $this;
     }
 
-    public function update(string $table, array $data, array $conditions): Dbh
+
+
+    public function update(string $table, array $data, array $conditions)
     {
         $set = '';
 
@@ -127,7 +138,7 @@ class Dbh
         return $this;
     }
 
-    public function delete(string $table, array $conditions): Dbh
+    public function delete(string $table, array $conditions)
     {
         $where = '';
 
@@ -144,6 +155,18 @@ class Dbh
         $this->query($sql, $parameters);
 
         return $this;
+    }
+
+    public function results() {
+        return $this->_results;
+    }
+
+    public function error() {
+        return $this->_error;
+    }
+
+    public function count() {
+        return $this->_count;
     }
 
 

@@ -1,5 +1,11 @@
 <?php
 
+require_once '../core/init.php';
+
+if (isset($_SESSION["user"])) {
+    header("Location: ../../public/index.php");
+}
+
 if (isset($_POST["submit"])) {
     // Acquire the data
     $email = $_POST["email"];

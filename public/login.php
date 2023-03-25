@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../resources/css/universal.css"/>
-    <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <body>
 <header>
     <div class="p-3 text-bg-dark">
@@ -33,7 +33,7 @@
             <div id="login-block" class="d-flex flex-column align-items-center">
                 <img class="login-symbol" src="../resources/img/logo-simbols.svg">
                 <div class="div-input d-flex flex-column">
-                    <input name="email" type="email" required>
+                    <input name="email" type="tel" required>
                     <label for="email">E-pasts</label>
                 </div>
                 <div class="div-input d-flex flex-column">

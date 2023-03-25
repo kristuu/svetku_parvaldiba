@@ -1,5 +1,10 @@
 <?php
 require_once '../backend/core/init.php';
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: login.php");
+}
+$user = new Participant();
 ?>
 
 <!DOCTYPE html>
@@ -13,53 +18,25 @@ require_once '../backend/core/init.php';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../resources/css/universal.css"/>
-    <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<header>
-    <div class="p-3 text-bg-dark">
-        <div class="container-fluid">
-            <div class="d-flex flex-wrap align-items-center justify-content-between">
-                <div class="align-self-start">
-                    <img src="../resources/img/account.svg" height="32px">
-                    <span class="align-self-start align-middle"
-                          style="font-family: 'Work Sans'"><strong><?= $_SESSION["usersfname"] ?></strong>
-                        <?php
-                        if ($_SESSION["Organiser"]) {
-                            echo " | Svētku organizators";
-                        } else {
-                            echo " | Svētku dalībnieks";
-                        }
-                        ?>
-                    </span>
-                </div>
-                <img src="../resources/img/logo-simbols.svg" height="32px">
-                <div class="d-flex flex-wrap align-items-center justify-content-center">
-                    <a href="../backend/includes/logout.inc.php">
-                        <img class="align-self-start" src="../resources/img/sign_out.svg" height="32px">
-                    </a>
-                </div>
-            </div>
+<?php include 'header.php'?>
+<main class="container">
+    <div class="w-100 bg-white rounded mt-lg-4 mt-2 d-flex flex-column align-items-center text-center">
+        <div class="div-logo m-auto">
+            <img class="logo-gars img-fluid" src="../resources/img/logo-rinda.svg"/>
+            <img class="logo-iss img-fluid" src="../resources/img/logo-kompakts.svg"/>
+        </div>
+        <div class="my-3 w-75 text-start">
+            <h1 style="font-family: var(--font-default);">Esi piekļuvis sistēmai kā <?=$user->getData()->FName . ' ' . $user->getData()->LName?></h1>
+            <h3>Piesaistītie kolektīvi:</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><?= ?></li>
+            </ul>
         </div>
     </div>
-</header>
-<section id="main-menu" class="d-flex flex-column justify-content-center">
-    <nav class="btn-toolbar" role="toolbar">
-        <div class="btn-group me-2" role="group">
-            <button type="button" class="btn btn-success btn">Sākums</button>
-        </div>
-        <div class="btn-group me-2" role="group">
-            <button type="button" class="btn btn-light">Mani dati</button>
-            <button type="button" class="btn btn-light">Mani kolektīvi</button>
-        </div>
-        <div class="btn-group me-2" role="group">
-            <button type="button" class="btn btn-secondary">Piekrišana</button>
-            <button type="button" class="btn btn-secondary">Biežāk uzdotie jautājumi</button>
-        </div>
-    </nav>
-    <div class="menu-background mt-2">
-        <?= print_r(Dbh::getInstance()->get("participants")->_results); ?>
-    </div>
-</section>
+</main>
+<script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
