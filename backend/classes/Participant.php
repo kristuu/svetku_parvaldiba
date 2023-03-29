@@ -42,6 +42,19 @@ class Participant
         return FALSE;
     }
 
+    public function getUser($user = null) {
+        if ($user) {
+            $field = 'UserID';
+            $data = $this->_DB->get('participants', array($field => $user));
+
+            if ($data->count()) {
+                $this->_queryData = $data->_results[0];
+                return $this->_queryData;
+            }
+        }
+        return FALSE;
+    }
+
     public function getAllUsers() {
         $data = $this->_DB->get('participants');
         if ($data->count()) {
