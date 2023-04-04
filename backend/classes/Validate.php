@@ -52,4 +52,37 @@ class Validate
         return preg_match('/[!@#$%^&*(),.?":{}|<>]/', $string) === 1;
     }
 
+    // Check if the provided string is a valid email address
+    public function isEmail(string $string) : bool
+    {
+        return filter_var($string, FILTER_VALIDATE_EMAIL);
+    }
+
+    // Check if the provided string is a valid password
+    public function isPassword(string $string) : bool
+    {
+        if (strlen($string) < 8) {
+            return FALSE;
+        } else if (!$this->hasUppercase($string)) {
+            return FALSE;
+        } else if (!$this->hasLowercase($string)) {
+            return FALSE;
+        } else if (!$this->hasSpecialChar($string)) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function cleanInput(string $string) : string
+    {
+        // Trim function removes whitespace from beginning and end of string
+        $string = trim($string);
+        // Stripslashes function removes backslashes from string
+        $string = stripslashes($string);
+        // Htmlspecialchars function converts special characters to HTML entities
+        $string = htmlspecialchars($string);
+        return $string;
+    }
+
 }
