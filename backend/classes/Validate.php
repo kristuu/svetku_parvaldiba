@@ -2,7 +2,6 @@
 
 class Validate
 {
-    private $data;
     private $errors = [];
 
 
@@ -60,6 +59,26 @@ class Validate
     public function isEmail(string $string) : bool
     {
         return filter_var($string, FILTER_VALIDATE_EMAIL);
+    }
+
+    // Check if the provided string is a valid phone number based on selected country
+    public function isPhone(string $phoneNumber, string $country) : bool
+    {
+        switch ($country) {
+            case 'EE':
+                $pattern = '/^(\+372)?[58][0-9]{7}$/';
+                break;
+            case 'LV':
+                $pattern = '/^(\+371)?2[0-9]{7}$/';
+                break;
+            case 'LT':
+                $pattern = '/^(\+370)?[65][0-9]{7}$/';
+                break;
+            default:
+                return FALSE;
+        }
+
+        return preg_match($pattern, $phoneNumber) === 1;
     }
 
     // Check if the provided string is a valid password
