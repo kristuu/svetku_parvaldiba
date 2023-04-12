@@ -2,6 +2,10 @@
 
 class Validate
 {
+    private $data;
+    private $errors = [];
+
+
     // Check if the provided variable's value is empty
     public function isEmpty(mixed $value): bool
     {
@@ -59,19 +63,23 @@ class Validate
     }
 
     // Check if the provided string is a valid password
-    public function isPassword(string $string) : bool
+    // In case of any errors, call a function to register an error, return the array of errors, otherwise return FALSE
+    public function isPassword(string $string) : array|false
     {
         if (strlen($string) < 8) {
-            return FALSE;
-        } else if (!$this->hasUppercase($string)) {
-            return FALSE;
-        } else if (!$this->hasLowercase($string)) {
-            return FALSE;
-        } else if (!$this->hasSpecialChar($string)) {
-            return FALSE;
-        } else {
-            return TRUE;
+            $this->error("length", ["min" => 8, "max" => 32]);
         }
+        if (!$this->hasUppercase($string)) {
+            $this->error("uppercase", []);
+        }
+        if (!$this->hasLowercase($string)) {
+            $this->error("lowercase", []);
+        }
+        if (!$this->hasSpecialChar($string)) {
+            $this->error("special", []);
+        }
+
+        return $this->errors ?? FALSE;
     }
 
     public function cleanInput(string $string) : string
@@ -83,6 +91,24 @@ class Validate
         // Htmlspecialchars function converts special characters to HTML entities
         $string = htmlspecialchars($string);
         return $string;
+    }
+
+    public function error(string $restriction, array $parameters) : void
+    {
+        switch ($restriction) {
+            case "length":
+                $this->errors[$restriction] = "garumam jābūt starp " . $parameters["min"] . " un " . $parameters["max"] . " simboliem;";
+                break;
+            case "uppercase":
+                $this->errors[$restriction] = "jāsatur vismaz viens lielais burts;";
+                break;
+            case "lowercase":
+                $this->errors[$restriction] = "jāsatur vismaz viens mazais burts;";
+                break;
+            case "special":
+                $this->errors[$restriction] = "jāsatur vismaz viens speciālais simbols;";
+                break;
+        }
     }
 
 }
