@@ -1,3 +1,22 @@
+<?php
+require_once '../backend/core/init.php';
+if(isset($_GET["error"])) {
+    switch ($_GET["error"]) {
+        case "emptyinput":
+            $errorMessage = "Lūdzu, aizpildiet visus laukus!";
+            break;
+        case "wronglogin":
+            $errorMessage =  "Nepareizs e-pasts vai parole!";
+            break;
+        case "usernotfound":
+            $errorMessage = "Lietotājs nav atrasts!";
+            break;
+        default:
+            $errorMessage = "Neatpazīta kļūda!";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="lv">
 <head>
@@ -40,6 +59,8 @@
                     <input name="password" type="password"
                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,24}$" required>
                     <label for="password">Parole</label>
+                    <p><?=var_dump($_SESSION) . "aaaa";?></p>
+                    <p class="error">KĻŪDA » <?= $errorMessage ?? '' ?></p>
                     <p>* Šī ir iepriekšēji reģistrētu personu autorizācijas sistēma.<br>Ja esi svētku dalībnieks, taču
                         neesi saņēmis piekļuves datus, sazinies ar sava mākslas kolektīva vadītāju.</p>
                 </div>

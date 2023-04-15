@@ -1,6 +1,18 @@
 <?php
 session_start();
 
+$GLOBALS['config'] = array(
+    'mysql' => array(
+        'host' => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'db' => 'svetku_parvaldiba'
+    ),
+    'session' => array(
+        'session_name' => 'user'
+    )
+);
+
 define('ROOT_DIR', dirname(__FILE__, 3) . '/');
 
 spl_autoload_register(function ($class) {

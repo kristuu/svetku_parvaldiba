@@ -83,22 +83,22 @@ class Validate
 
     // Check if the provided string is a valid password
     // In case of any errors, call a function to register an error, return the array of errors, otherwise return FALSE
-    public function isPassword(string $string) : array|false
+    public function isPassword(string $string)
     {
         if (strlen($string) < 8) {
             $this->error("length", ["min" => 8, "max" => 32]);
         }
         if (!$this->hasUppercase($string)) {
-            $this->error("uppercase", []);
+            $this->error("uppercase");
         }
         if (!$this->hasLowercase($string)) {
-            $this->error("lowercase", []);
+            $this->error("lowercase");
         }
         if (!$this->hasSpecialChar($string)) {
-            $this->error("special", []);
+            $this->error("special");
         }
 
-        return $this->errors ?? FALSE;
+        return $this->errors ?? TRUE;
     }
 
     public function cleanInput(string $string) : string
@@ -112,7 +112,7 @@ class Validate
         return $string;
     }
 
-    public function error(string $restriction, array $parameters) : void
+    public function error(string $restriction, array $parameters = []) : void
     {
         switch ($restriction) {
             case "length":
@@ -127,6 +127,8 @@ class Validate
             case "special":
                 $this->errors[$restriction] = "jāsatur vismaz viens speciālais simbols;";
                 break;
+            default:
+                $this->errors[$restriction] = "nedefinēta kļūda: {$restriction};";
         }
     }
 

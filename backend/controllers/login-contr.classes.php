@@ -7,26 +7,20 @@ class LoginContr extends Login
 
     public function __construct($email, $password)
     {
+        parent::__construct();
         $this->email = $email;
         $this->password = $password;
     }
 
     public function loginUser()
     {
-        if (!($this->emptyInput())) {
+        $validate = new Validate();
+        if ($validate->isEmpty($this->email) && $validate->isEmpty($this->password)) {
             header("Location: ../../public/login.php?error=emptyinput");
+            exit();
         }
 
         $this->getUser($this->email, $this->password);
-    }
-
-    private function emptyInput()
-    {
-        if (empty($this->email) || empty($this->password)) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
 

@@ -13,7 +13,6 @@ class Participant
         if (!$user) {
             if (isset($_SESSION["user_id"])) {
                 $user = $_SESSION["user_id"];
-
                 if ($this->findUser($user)) {
                     $this->_isLoggedIn = true;
                 }
@@ -31,11 +30,11 @@ class Participant
 
     public function findUser($user = null) {
         if ($user) {
-            $field = 'UserID';
-            $data = $this->_DB->get('participants', array($field => $user));
+            $field = 'ParticipantID';
+            $data = $this->_DB->get('participants', array($field, '=', $user));
 
-            if ($data->count()) {
-                $this->_data = $data->_results[0];
+            if ($data->getCount()) {
+                $this->_data = $data->getResults()[0];
                 return TRUE;
             }
         }
@@ -47,8 +46,8 @@ class Participant
             $field = 'UserID';
             $data = $this->_DB->get('participants', array($field => $user));
 
-            if ($data->count()) {
-                $this->_queryData = $data->_results[0];
+            if ($data->getCount()) {
+                $this->_queryData = $data->getResults()[0];
                 return $this->_queryData;
             }
         }
@@ -57,8 +56,8 @@ class Participant
 
     public function getAllUsers() {
         $data = $this->_DB->get('participants');
-        if ($data->count()) {
-            $this->_queryData = $data->_results;
+        if ($data->getCount()) {
+            $this->_queryData = $data->getResults();
             return $this->_queryData;
         }
         return 'No participants in table.';
@@ -81,7 +80,7 @@ class Participant
             $id = $_SESSION["user_id"];
         }
 
-        $this->_DB->update('participants', $data, array('UserID' => $id));
+        $this->_DB->update('participants', $data, array('ParticipantID', $id));
     }
 }
 

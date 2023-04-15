@@ -1,59 +1,46 @@
 <?php
 
-class Login extends Dbh
+class Login
 {
+    private Dbh $_DB;
+
+    public function __construct()
+    {
+        $this->_DB = Dbh::getInstance();
+    }
     protected function getUser($email, $password)
     {
-        $conn = self::getInstance()->getConnection();
-        $stmt = $conn->prepare('SELECT Password FROM participants WHERE Email = ? OR Phone = ?;');
+        $data = $this->_DB->get('participants', array('Email', '=', $email));
 
-        if (!$stmt->execute(array($email, $email))) {
-            $stmt = null;
-            header("Location: ../../public/login.php?error=stmtfailed");
-            exit();
-        }
+        $passwordHashed = $data->getResults()[0]->Password;
 
-        $passwordHashed = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $checkPassword = password_verify($password, $passwordHashed[0]["Password"]);
+        $checkPassword = password_verify($password, $passwordHashed);
 
-        if (count($passwordHashed) == 0) {
-            $stmt = null;
+        if (is_null($passwordHashed)) {
             header("Location: ../../public/login.php?error=usernotfound");
             exit();
         }
-
-        if ($checkPassword === false) {
-            $stmt = null;
+        if (!$checkPassword) {
             header("Location: ../../public/login.php?error=wrongpassword");
             exit();
         } else {
-            $conn = self::getInstance()->getConnection();
-            $stmt = $conn->prepare('SELECT * FROM participants WHERE (Email = ? OR Phone = ?) AND Password = ?;');
+            $this->_DB->get('participants', array('Email' => $email, 'Password' => $passwordHashed));
 
-            if (!$stmt->execute(array($email, $email, $passwordHashed[0]["Password"]))) {
-                $stmt = null;
-                header("Location: ../../public/login.php?error=stmtfailed");
-                exit();
-            }
-
-            if ($stmt->rowCount() === 0) {
-                $stmt = null;
+            if ($this->_DB->getCount() === 0) {
                 header("Location: ../../public/login.php?error=usernotfound");
                 exit();
             }
 
-            $user = $stmt->fetchall(PDO::FETCH_ASSOC);
+            $user = $this->_DB->getResults();
 
 
             session_start();
-            $_SESSION["user_id"] = $user[0]["UserID"];
-            if ($user[0]["Organiser"] === 1) {
+            $_SESSION["user_id"] = $user[0]->ParticipantID;
+            if ($user[0]->Organiser === 1) {
                 $_SESSION["Organiser"] = TRUE;
             } else {
                 $_SESSION["Organiser"] = FALSE;
             }
         }
-
-        $stmt = null;
     }
 }

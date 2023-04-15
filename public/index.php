@@ -4,6 +4,7 @@ require_once '../backend/core/init.php';
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
 }
+
 $participant = new Participant();
 $participCollectives = new ParticipCollectives();
 ?>
