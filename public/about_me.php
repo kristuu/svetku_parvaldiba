@@ -4,8 +4,23 @@ require_once '../backend/core/init.php';
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
 }
+
 $participant = new Participant();
 $participCollectives = new ParticipCollectives();
+
+if(isset($_GET["error"])) {
+    if ($_GET["error"] == "emptyfields") {
+        $errorMessage = "Lūdzu, aizpildi visus laukus!";
+    } else if ($_GET["error"] == "unallowedchar") {
+        $errorMessage = "Pārliecinies, ka ievades laukos nav neatļautu rakstzīmju!";
+    }
+}
+
+if(isset($errorMessage)) {
+    $errorHolder = "<p class='error'>KĻŪDA » " . $errorMessage ?? "</p>";
+} else {
+    $errorHolder = "";
+}
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +74,7 @@ $participCollectives = new ParticipCollectives();
                 </div>
                 <button type="submit" name="submitSelfEdit" class="btn btn-outline-success ms-auto">Saglabāt</button>
             </div>
+            <?=$errorHolder?><br>
         </form>
     </div>
 </main>

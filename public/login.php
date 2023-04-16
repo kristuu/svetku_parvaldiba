@@ -5,7 +5,7 @@ if(isset($_GET["error"])) {
         case "emptyinput":
             $errorMessage = "Lūdzu, aizpildiet visus laukus!";
             break;
-        case "wronglogin":
+        case "wrongpassword":
             $errorMessage =  "Nepareizs e-pasts vai parole!";
             break;
         case "usernotfound":
@@ -14,6 +14,12 @@ if(isset($_GET["error"])) {
         default:
             $errorMessage = "Neatpazīta kļūda!";
     }
+}
+
+if(isset($errorMessage)) {
+    $errorHolder = "<p class='error'>KĻŪDA » " . $errorMessage ?? "</p>";
+} else {
+    $errorHolder = "";
 }
 ?>
 
@@ -59,8 +65,7 @@ if(isset($_GET["error"])) {
                     <input name="password" type="password"
                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,24}$" required>
                     <label for="password">Parole</label>
-                    <p><?=var_dump($_SESSION) . "aaaa";?></p>
-                    <p class="error">KĻŪDA » <?= $errorMessage ?? '' ?></p>
+                    <?=$errorHolder?>
                     <p>* Šī ir iepriekšēji reģistrētu personu autorizācijas sistēma.<br>Ja esi svētku dalībnieks, taču
                         neesi saņēmis piekļuves datus, sazinies ar sava mākslas kolektīva vadītāju.</p>
                 </div>

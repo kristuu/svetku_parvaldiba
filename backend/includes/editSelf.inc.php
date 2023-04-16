@@ -3,6 +3,9 @@
 require_once '../core/init.php';
 
 if (isset($_POST["submitSelfEdit"])) {
+    // Create Validation object
+    $validate = new Validate();
+
     // Acquire the data
     $data = array(array(
         'FName' => $_POST["FName"],
@@ -11,6 +14,19 @@ if (isset($_POST["submitSelfEdit"])) {
         'Phone' => $_POST["Phone"],
         'Email' => $_POST["Email"]
     ));
+
+    foreach ($data[0] as $key => $value) {
+        if ($validate->isEmpty($value)) {
+            header("Location: ". PUBLIC_DIR ."/about_me.php?error=emptyfields");
+            exit();
+        }
+        $data[0][$key] = $validate->cleanInput($value);
+        $immuneFields = array("MainCollectiveID", "Email");
+        if (!in_array($key, $immuneFields) && $validate->hasSpecialChar($value)) {
+            header("Location: ". PUBLIC_DIR ."/about_me.php?error=unallowedchar");
+            exit();
+        }
+    }
 
     $collectiveID = $_POST["MainCollectiveID"];
 
@@ -22,8 +38,8 @@ if (isset($_POST["submitSelfEdit"])) {
 
 
     // Going back to front page
-    header("Location: ../../public/index.php");
+    header("Location: ". PUBLIC_DIR ."/index.php");
 
 } else {
-    echo "no post set";
+    header("Location: ". PUBLIC_DIR ."/about_me.php");
 }

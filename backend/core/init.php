@@ -14,6 +14,7 @@ $GLOBALS['config'] = array(
 );
 
 define('ROOT_DIR', dirname(__FILE__, 3) . '/');
+define('PUBLIC_DIR', '/svetku_parvaldiba/public');
 define('IMG_DIR', '/svetku_parvaldiba/resources/img');
 
 spl_autoload_register(function ($class) {
