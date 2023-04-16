@@ -45,7 +45,7 @@ $participCollectives = new ParticipCollectives();
                     <label class="input-group-text" for="mainCollectiveInput" style="font-family: var(--font-title);"><strong>Galvenais kolektīvs</strong></label>
                     <select class="form-select" id="mainCollectiveInput" name="MainCollectiveID">
                         <?php
-                        $collectives = $participCollectives->getParticipantsCollectives($_SESSION["user_id"]);
+                        $collectives = $participCollectives->getParticipantsCollectives($participant->getData()->ParticipantID);
                         foreach ($collectives as $object) {
                             echo "<option value='$object->CollectiveID' ".($object->MainCollective ? 'selected' : '').">$object->CollectiveName</option>";
                         }

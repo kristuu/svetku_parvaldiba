@@ -10,8 +10,7 @@ class Login
     }
     protected function getUser($email, $password)
     {
-        $data = $this->_DB->get('participants', array('Email', '=', $email));
-
+        $data = $this->_DB->get('participants', array(array('Email', '=', $email)));
         $passwordHashed = $data->getResults()[0]->Password;
 
         $checkPassword = password_verify($password, $passwordHashed);
@@ -24,7 +23,7 @@ class Login
             header("Location: ../../public/login.php?error=wrongpassword");
             exit();
         } else {
-            $this->_DB->get('participants', array('Email' => $email, 'Password' => $passwordHashed));
+            $this->_DB->get('participants', array(array('Email', '=', $email), array('Password', '=', $passwordHashed)));
 
             if ($this->_DB->getCount() === 0) {
                 header("Location: ../../public/login.php?error=usernotfound");

@@ -4,9 +4,9 @@ $user = new Participant();
 
 <header>
     <div class="container">
-        <nav class="navbar navbar-expand-lg bg-dark rounded" data-bs-theme="dark" aria-label="Navigation bar">
+        <nav class="navbar navbar-expand-lg bg-dark rounded" style="margin-top: 20px;" data-bs-theme="dark" aria-label="Navigation bar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img src="../../resources/img/logo-simbols.svg" style="background-color: white; border-radius: 10px;" height="32px"></a>
+                <a class="navbar-brand" href="#"><img src="<?=IMG_DIR?>/logo-simbols.svg" style="background-color: white; border-radius: 10px;" height="32px"></a>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -43,11 +43,11 @@ $user = new Participant();
                             </li>
                         <?php endif; ?>
                     </ul>
-                    <img src="../../resources/img/account.svg" height="32px">
+                    <img src="<?=IMG_DIR?>/account.svg" height="32px">
                     <span class="text-white ms-lg-2"
                           style="font-family: 'Work Sans'"><strong><?= $user->getData()->FName . " " . $user->getData()->LName; ?></strong>
                         <?php
-                        if ($_SESSION["Organiser"]):
+                        if ($user->getData()->Organiser):
                             echo " | Svētku organizators";
                         else:
                             echo " | Svētku dalībnieks";
@@ -55,7 +55,7 @@ $user = new Participant();
                         ?>
                     </span>
                     <a href="../backend/includes/logout.inc.php" class="ms-lg-4">
-                        <img class="align-self-start" src="../../resources/img/sign_out.svg" height="32px">
+                        <img class="align-self-start" src="<?=IMG_DIR?>/sign_out.svg" height="32px">
                     </a>
                 </div>
             </div>

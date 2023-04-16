@@ -31,23 +31,14 @@ $participCollectives = new ParticipCollectives();
             <img class="logo-iss img-fluid" src="../resources/img/logo-kompakts.svg"/>
         </div>
         <div class="my-3 w-75 text-start">
-            <h1 style="font-family: var(--font-default);">Esi piekļuvis sistēmai kā <?=$participant->getData()->FName . ' ' . $user->getData()->LName?></h1>
+            <h1 style="font-family: var(--font-default);">Esi piekļuvis sistēmai kā <?=$participant->getData()->FName . ' ' . $participant->getData()->LName?></h1>
             <h3>Piesaistītie kolektīvi:</h3>
             <ul class="list-group list-group-flush" style="font-family: var(--font-default);">
                 <?php
-                $participants = $participCollectives->getParticipantsCollectives(1);
-                foreach ($participants as $objectKey => $object) {
-                    foreach ($object as $key => $value) {
-                        if ($key === "CollectiveName") {
-                            echo "<li class='list-group-item'>$value";
-                        }
-                        if ($key === "MainCollective" && $value) {
-                            echo " | <strong>GALVENAIS</strong></li>";
-                        }
-                        if ($key === "MainCollective" && !$value) {
-                            echo "</li>";
-                        }
-                    }
+                $collectives = $participCollectives->getParticipantsCollectives($participant->getData()->ParticipantID);
+                foreach ($collectives as $collective) {
+                    // echo collective name and if it is main collective, then add "GALVENAIS" to it
+                    echo "<li class='list-group-item'>{$collective->CollectiveName}" . ($collective->MainCollective ? " | <strong>GALVENAIS</strong>" : "") . "</li>";
                 }
                 ?>
             </ul>

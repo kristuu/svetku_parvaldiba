@@ -39,6 +39,7 @@ class Dbh
                     $x++;
                 }
             }
+
             if ($this->_query->execute()) {
                 $this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
                 $this->_count = $this->_query->rowCount();
@@ -51,27 +52,39 @@ class Dbh
 
     private function action($action, $table, $where = array(), $joins = array())
     {
-        if (count($where) === 3) {
-            $allowedActions = array('SELECT', 'DELETE');
+            /*$allowedActions = array('SELECT', 'DELETE');
             $allowedOperators = array('=', '>', '<', '>=', '<=');
 
-            $field = $where[0];
-            $operator = $where[1];
-            $value = $where[2];
-
-            if(in_array($operator, $allowedOperators)) {
-                $sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";
-                if (!$this->query($sql, array($value))->_error) {
+            if(in_array($operator, $allowedOperators)) {*/
+                $value = array();
+                $sql = "{$action} FROM {$table}";
+                if(count($joins) > 0) {
+                    foreach ($joins as $array) {
+                        $sql .= " {$array[0]} JOIN {$array[1]} ON {$array[2]} = {$array[3]}";
+                    }
+                }
+                if(count($where) > 0) {
+                    $x = 1;
+                    foreach($where as $array) {
+                        if($x === 1) {
+                            $sql .= " WHERE {$array[0]} {$array[1]} ?";
+                        } elseif ($x > 1) {
+                            $sql .= " AND {$array[0]} {$array[1]} ?";
+                        }
+                        $value[] = $array[2];
+                        $x++;
+                    }
+                }
+                if (!$this->query($sql, $value)->_error) {
                     return $this;
                 }
-            }
-        }
+            /*}*/
         return FALSE;
     }
 
     public function get($table, $where = array(), $joins = array())
     {
-        return $this->action("SELECT *", $table, $where);
+        return $this->action("SELECT *", $table, $where, $joins);
     }
 
     public function delete($table, $where = array())
@@ -93,16 +106,32 @@ class Dbh
     }
 
     public function update($table, $data = array(), $where = array()) {
-        $set = [];
+        $set = array();
 
-        foreach ($data as $column => $value) {
-            $set[] = "{$column} = '{$value}'";
+        foreach($data as $array) {
+            foreach ($array as $column => $value) {
+                $set[] = "{$column} = '{$value}'";
+            }
         }
 
-        $set = implode(', ', $set);
-        $sql = "UPDATE {$table} SET {$set} WHERE {$where[0]} = {$where[1]}";
+        $bindValues = array();
 
-        if (!$this->query($sql)->_error) {
+        $set = implode(', ', $set);
+        $sql = "UPDATE {$table} SET {$set}";
+        if(count($where) > 0) {
+            $x = 1;
+            foreach($where as $array) {
+                if($x === 1) {
+                    $sql .= " WHERE {$array[0]} {$array[1]} ?";
+                } elseif ($x > 1) {
+                    $sql .= " AND {$array[0]} {$array[1]} ?";
+                }
+                $bindValues[] = $array[2];
+                $x++;
+            }
+        }
+
+        if (!$this->query($sql, $bindValues)->_error) {
             return $this;
         } else {
             return FALSE;

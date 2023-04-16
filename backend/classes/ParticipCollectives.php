@@ -12,11 +12,10 @@ class ParticipCollectives
 
     public function findParticipantsCollectives($participantID = null) {
         if($participantID) {
-            $field = 'ParticipantID';
-            $data = $this->_DB->get('participcollectives', array($field => $participantID), 'collectives.CollectiveID, collectives.CollectiveName, participcollectives.MainCollective', 'INNER JOIN collectives ON participcollectives.CollectiveID = collectives.CollectiveID INNER JOIN participants ON participcollectives.ParticipantID = participants.UserID');
-
-            if ($data->count()) {
-                $this->_data = $data->_results;
+            $field = 'participants.ParticipantID';
+            $data = $this->_DB->get('participcollectives', array(array($field, '=', $participantID)), array(array("INNER", "collectives", "participcollectives.CollectiveID", "collectives.CollectiveID"), array("INNER", "participants", "participcollectives.ParticipantID", "participants.ParticipantID")));
+            if ($data->getCount()) {
+                $this->_data = $data->getResults();
                 return TRUE;
             }
         }
@@ -35,10 +34,10 @@ class ParticipCollectives
     public function findCollectiveParticipants($collectiveID = null) {
         if($collectiveID) {
             $field = 'CollectiveID';
-            $data = $this->_DB->get('participcollectives', array($field => $collectiveID), 'participants.FName, participants.LName', 'INNER JOIN collectives ON participcollectives.CollectiveID = collectives.CollectiveID INNER JOIN participants ON participcollectives.ParticipantID = participants.UserID');
+            $data = $this->_DB->get('participcollectives', array(array($field, '=', $collectiveID)), array(array("INNER", "collectives", "participcollectives.CollectiveID", "collectives.CollectiveID"), array("INNER", "participants", "participcollectives.ParticipantID", "participants.ParticipantID")));
 
-            if ($data->count()) {
-                $this->_data = $data->_results;
+            if ($data->getCount()) {
+                $this->_data = $data->getResults();
                 return TRUE;
             }
         }
@@ -54,8 +53,10 @@ class ParticipCollectives
     }
 
     public function updateParticipantsMainCollective(string $mainCollectiveID) {
-        $this->_DB->update('participcollectives', array('MainCollective' => 0), array('ParticipantID' => $_SESSION["user_id"]));
-        $this->_DB->update('participcollectives', array('MainCollective' => 1), array('ParticipantID' => $_SESSION["user_id"], 'CollectiveID' => $mainCollectiveID));
+        $user = new Participant();
+        $userID = $user->getData()->ParticipantID;
+        $this->_DB->update('participcollectives', array(array('MainCollective' => 0)), array(array('ParticipantID', '=', $userID)));
+        $this->_DB->update('participcollectives', array(array('MainCollective' => 1)), array(array('ParticipantID', '=', $userID), array('CollectiveID', '=', $mainCollectiveID)));
     }
 
     public function getData() {

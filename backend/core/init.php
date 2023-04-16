@@ -14,6 +14,7 @@ $GLOBALS['config'] = array(
 );
 
 define('ROOT_DIR', dirname(__FILE__, 3) . '/');
+define('IMG_DIR', '/svetku_parvaldiba/resources/img');
 
 spl_autoload_register(function ($class) {
     require_once (ROOT_DIR . 'backend/classes/' . $class . '.php');

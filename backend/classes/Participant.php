@@ -31,7 +31,7 @@ class Participant
     public function findUser($user = null) {
         if ($user) {
             $field = 'ParticipantID';
-            $data = $this->_DB->get('participants', array($field, '=', $user));
+            $data = $this->_DB->get('participants', array(array($field, '=', $user)));
 
             if ($data->getCount()) {
                 $this->_data = $data->getResults()[0];
@@ -44,7 +44,7 @@ class Participant
     public function getUser($user = null) {
         if ($user) {
             $field = 'UserID';
-            $data = $this->_DB->get('participants', array($field => $user));
+            $data = $this->_DB->get('participants', array(array($field, '=', $user)));
 
             if ($data->getCount()) {
                 $this->_queryData = $data->getResults()[0];
@@ -76,11 +76,13 @@ class Participant
     }
 
     public function update(array $data, int $id = null) {
-        if (!$id && isset($_SESSION["user_id"])) {
-            $id = $_SESSION["user_id"];
+        if (!$id) {
+            $participant = new Participant();
+            $participantId = $participant->getData()->ParticipantID;
+            $id = $participantId;
         }
 
-        $this->_DB->update('participants', $data, array('ParticipantID', $id));
+        $this->_DB->update('participants', $data, array(array('ParticipantID', '=', $id)));
     }
 }
 

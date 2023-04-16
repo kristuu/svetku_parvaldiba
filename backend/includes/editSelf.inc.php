@@ -4,13 +4,13 @@ require_once '../core/init.php';
 
 if (isset($_POST["submitSelfEdit"])) {
     // Acquire the data
-    $data = array(
+    $data = array(array(
         'FName' => $_POST["FName"],
         'LName' => $_POST["LName"],
         'BirthDate' => $_POST["BirthDate"],
         'Phone' => $_POST["Phone"],
         'Email' => $_POST["Email"]
-    );
+    ));
 
     $collectiveID = $_POST["MainCollectiveID"];
 
