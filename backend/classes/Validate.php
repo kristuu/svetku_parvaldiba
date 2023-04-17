@@ -169,4 +169,15 @@ class Validate
         }
     }
 
+    public function redirect(string $pageName, string $errorType, string $errorField = '') : void
+    {
+        if($errorField) {
+            header("Location: " . PUBLIC_DIR . "/{$pageName}.php?error={$errorType}&field={$errorField}");
+            exit();
+        } else {
+            header("Location: " . PUBLIC_DIR . "/{$pageName}.php?error={$errorType}");
+            exit();
+        }
+    }
+
 }

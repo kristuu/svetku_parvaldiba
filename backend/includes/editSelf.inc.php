@@ -16,15 +16,27 @@ if (isset($_POST["submitSelfEdit"])) {
     ));
 
     foreach ($data[0] as $key => $value) {
+        // Check if any field is empty, return the user
         if ($validate->isEmpty($value)) {
             header("Location: ". PUBLIC_DIR ."/about_me.php?error=emptyfields");
             exit();
         }
+        // clean the input data
         $data[0][$key] = $validate->cleanInput($value);
+        // fields that are immune to special character check
         $immuneFields = array("MainCollectiveID", "Email");
+        // Check if any other field contains special characters, return the user
         if (!in_array($key, $immuneFields) && $validate->hasSpecialChar($value)) {
             header("Location: ". PUBLIC_DIR ."/about_me.php?error=unallowedchar");
             exit();
+        }
+        // Check the length of fields
+        switch ($key) {
+            case ("FName" || "LName"):
+                if (!$validate->isLength($key, $value, 2, 30)) {
+                    $validate->redirect("about_me", "length", $key);
+                }
+                break;
         }
     }
 
