@@ -78,9 +78,34 @@ class Validate
         }
     }
 
-    public function hasSpecialChar(string $string) : bool
+    public function hasSpecialChar(string $field, string $string) : bool
     {
-        return preg_match('/[!@#$%^&*(),.?":{}|<>]/', $string);
+        if (preg_match('/[!@#$%^&*(),.?":{}|<>]/', $string)) {
+            return TRUE;
+        } else {
+            $this->addError($field, "specialChar");
+            return FALSE;
+        }
+    }
+
+    public function hasNoSpecialChar(string $field, string $string) : bool
+    {
+        if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $string)) {
+            return TRUE;
+        } else {
+            $this->addError($field, "noSpecialChar");
+            return FALSE;
+        }
+    }
+
+    public function hasNoNumbers(string $field, string $string) : bool
+    {
+        if(!preg_match('/[0-9]/', $string)) {
+            return TRUE;
+        } else {
+            $this->addError($field, "noNumbers");
+            return FALSE;
+        }
     }
 
     // Check if the provided string is a valid email address
@@ -140,44 +165,55 @@ class Validate
 
     public function addError(string $field, string $restriction, array $parameters = []) : void
     {
-        $this->errors[$restriction] = "<strong>{$field}</strong>: ";
+        $errorString = "lauks \"{$field}\": ";
         switch ($restriction) {
             case "length":
                 if ($parameters) {
-                    $this->errors[$restriction] .= "jābūt garumā no {$parameters['min']} līdz {$parameters['max']} simboliem;";
+                    $errorString .= "jābūt garumā no {$parameters['min']} līdz {$parameters['max']} simboliem;";
                 } else {
-                    $this->errors[$restriction] .= "neatbilstošs garums;";
+                    $errorString .= "neatbilstošs garums;";
                 }
                 break;
             case "fullUppercase":
-                $this->errors[$restriction] .= "jābūt tikai lielajiem burtiem;";
+                $errorString .= "jābūt tikai lielajiem burtiem;";
                 break;
             case "uppercase":
-                $this->errors[$restriction] .= "jāsatur vismaz viens lielais burts;";
+                $errorString .= "jāsatur vismaz viens lielais burts;";
                 break;
             case "fullLowercase":
-                $this->errors[$restriction] .= "jābūt tikai mazajiem burtiem;";
+                $errorString .= "jābūt tikai mazajiem burtiem;";
                 break;
             case "lowercase":
-                $this->errors[$restriction] .= "jāsatur vismaz viens mazais burts;";
+                $errorString .= "jāsatur vismaz viens mazais burts;";
                 break;
-            case "special":
-                $this->errors[$restriction] .= "jāsatur vismaz viens speciālais simbols;";
+            case "specialChar":
+                $errorString .= "jāsatur vismaz viens speciālais simbols;";
+                break;
+            case "noSpecialChar":
+                $errorString .= "nedrīkst saturēt speciālos simbolus;";
+                break;
+            case "noNumbers":
+                $errorString .= "nedrīkst saturēt ciparus;";
                 break;
             default:
-                $this->errors[$restriction] .= "nedefinēta kļūda: {$restriction};";
+                $errorString .= "nedefinēta kļūda: {$restriction};";
         }
+        $this->errors[] = $errorString;
+    }
+
+    public function getErrors() : array
+    {
+        return $this->errors;
     }
 
     public function redirect(string $pageName, string $errorType, string $errorField = '') : void
     {
         if($errorField) {
             header("Location: " . PUBLIC_DIR . "/{$pageName}.php?error={$errorType}&field={$errorField}");
-            exit();
         } else {
             header("Location: " . PUBLIC_DIR . "/{$pageName}.php?error={$errorType}");
-            exit();
         }
+        exit();
     }
 
 }

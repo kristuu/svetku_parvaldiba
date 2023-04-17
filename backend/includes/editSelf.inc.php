@@ -1,6 +1,7 @@
 <?php
 
 require_once '../core/init.php';
+require_once(ROOT_DIR . 'backend/includes/edit_person.inc.php');
 
 if (isset($_POST["submitSelfEdit"])) {
     // Create Validation object
@@ -16,28 +17,40 @@ if (isset($_POST["submitSelfEdit"])) {
     ));
 
     foreach ($data[0] as $key => $value) {
-        // Check if any field is empty, return the user
-        if ($validate->isEmpty($value)) {
-            header("Location: ". PUBLIC_DIR ."/about_me.php?error=emptyfields");
-            exit();
-        }
-        // clean the input data
+        // General validation
+
+        $validate->isEmpty($fields[$key], $value);
         $data[0][$key] = $validate->cleanInput($value);
+
         // fields that are immune to special character check
         $immuneFields = array("MainCollectiveID", "Email");
+
         // Check if any other field contains special characters, return the user
-        if (!in_array($key, $immuneFields) && $validate->hasSpecialChar($value)) {
-            header("Location: ". PUBLIC_DIR ."/about_me.php?error=unallowedchar");
-            exit();
+        if (!in_array($key, $immuneFields)) {
+            $validate->hasNoSpecialChar($fields[$key], $value);
         }
-        // Check the length of fields
-        switch ($key) {
-            case ("FName" || "LName"):
-                if (!$validate->isLength($key, $value, 2, 30)) {
-                    $validate->redirect("about_me", "length", $key);
-                }
+
+        // Additional validation for specific fields based on type
+        switch (true) {
+            case ($key == "FName" || $key == "LName"):
+                $validate->isLength($fields[$key], $value, 2, 30);
+                $validate->hasNoNumbers($fields[$key], $value);
                 break;
+            case ($key == "Phone"):
+                $validate->isLength($fields[$key], $value, 8, 8);
+                break;
+            case ($key == "Email"):
+                $validate->isLength($fields[$key], $value, 5, 255);
+                $validate->hasNoNumbers($fields[$key], $value);
+                break;
+            default:
         }
+    }
+
+    if ($validate->getErrors()) {
+        $errorsString = urlencode(http_build_query($validate->getErrors()));
+        header("Location: ". PUBLIC_DIR ."/about_me.php?errors=".$errorsString, true, 303);
+        exit;
     }
 
     $collectiveID = $_POST["MainCollectiveID"];

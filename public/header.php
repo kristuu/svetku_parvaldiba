@@ -6,7 +6,7 @@ $user = new Participant();
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-dark rounded" style="margin-top: 20px;" data-bs-theme="dark" aria-label="Navigation bar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img src="<?=IMG_DIR?>/logo-simbols.svg" style="background-color: white; border-radius: 10px;" height="32px"></a>
+                <a class="navbar-brand" href="<?=PUBLIC_DIR?>/index.php"><img src="<?=IMG_DIR?>/logo-simbols.svg" style="background-color: white; border-radius: 10px;" height="32px"></a>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

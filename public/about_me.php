@@ -8,6 +8,11 @@ if (!isset($_SESSION["user_id"])) {
 
 $participant = new Participant();
 $participCollectives = new ParticipCollectives();
+
+if (isset($_GET['errors'])) {
+    $errors = urldecode($_GET['errors']);
+    parse_str($errors, $errorsArray);
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +37,7 @@ $participCollectives = new ParticipCollectives();
             <div class="my-3 text-start">
                 <div class="input-group mb-3">
                     <span class="input-group-text" style="font-family: var(--font-title);"><strong>Vārds, uzvārds</strong></span>
-                    <input id="FName" name="FName" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participant->getData()->FName; ?>" class="form-control" placeholder="Visi vārdi, ja ir vairāki"/>
+                    <input id="FName" name="FName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participant->getData()->FName; ?>" class="form-control" placeholder="Visi vārdi, ja ir vairāki"/>
                     <input id="LName" name="LName" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participant->getData()->LName; ?>" class="form-control" placeholder="Visi uzvārdi, ja ir vairāki"/>
                 </div>
                 <div class="input-group mb-3">
@@ -62,8 +67,15 @@ $participCollectives = new ParticipCollectives();
                     <input id="Email" name="Email" data-bs-toggle="popover" type="email" autocomplete="off" value="<?= $participant->getData()->Email; ?>" class="form-control"/>
                 </div>
                 <button type="submit" name="submitSelfEdit" class="btn btn-outline-success ms-auto">Saglabāt</button>
+                <?php
+                if (isset($errorsArray)) {
+                    echo "<p class='error'>KĻŪDAS:</p>";
+                    foreach ($errorsArray as $error) {
+                        echo "<p class='error'>$error</p>";
+                    }
+                }
+                ?>
             </div>
-            <?=$errorHolder?><br>
         </form>
     </div>
 </main>
