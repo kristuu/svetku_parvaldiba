@@ -7,6 +7,10 @@ if (!isset($_SESSION["user_id"])) {
 
 $participant = new Participant();
 $participCollectives = new ParticipCollectives();
+
+if(!$participant->getData()->RulesAgreement || !$participant->getData()->DataAgreement) {
+    header("Location: agreement.php");
+}
 ?>
 
 <!DOCTYPE html>

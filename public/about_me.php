@@ -1,6 +1,6 @@
 <?php
 require_once '../backend/core/init.php';
-require_once(ROOT_DIR . 'backend/includes/edit_person.inc.php');
+require_once(ROOT_DIR . 'backend/includes/editPerson.inc.php');
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");

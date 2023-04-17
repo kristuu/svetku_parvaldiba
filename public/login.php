@@ -1,5 +1,10 @@
 <?php
 require_once '../backend/core/init.php';
+
+if(isset($_SESSION["user_id"])) {
+    header("Location: ". PUBLIC_DIR ."/index.php");
+}
+
 if(isset($_GET["error"])) {
     switch ($_GET["error"]) {
         case "emptyinput":

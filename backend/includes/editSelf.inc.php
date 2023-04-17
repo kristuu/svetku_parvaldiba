@@ -1,7 +1,7 @@
 <?php
 
 require_once '../core/init.php';
-require_once(ROOT_DIR . 'backend/includes/edit_person.inc.php');
+require_once(ROOT_DIR . 'backend/includes/editPerson.inc.php');
 
 if (isset($_POST["submitSelfEdit"])) {
     // Create Validation object

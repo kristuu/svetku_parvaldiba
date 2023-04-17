@@ -19,18 +19,18 @@ $user = new Participant();
                             <a class="nav-link active" aria-current="page" href="about_me.php">Mani dati</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Palīdzība</a>
+                            <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false">Palīdzība</a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="#">Biežāk uzdotie jautājumi</a>
-                                    <a class="dropdown-item" href="#">Datu izmantošana</a>
+                                    <a class="dropdown-item" href="#">BUJ</a>
+                                    <a class="dropdown-item" href="<?=PUBLIC_DIR?>/agreement.php">Datu izmantošana</a>
                                 </li>
                             </ul>
                         </li>
                         <?php if ($user->getData()->Organiser):
                             ?>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Pārvaldība</a>
+                                <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false"><strong>ADMIN</strong></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a class="dropdown-item" href="../backend/admin/collectives.php">Kolektīvi</a>
