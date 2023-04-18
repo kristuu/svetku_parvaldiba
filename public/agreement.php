@@ -21,10 +21,10 @@ $dataAgreement = $participant->getData()->DataAgreement;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../resources/css/universal.css"/>
-    <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 <body>
-<?php include 'header.php'?>
+<?php include ROOT_DIR . 'public/blocks/header.php' ?>
 <main class="container">
     <div class="w-100 bg-white rounded mt-lg-4 mt-2 d-flex flex-column align-items-center text-center">
         <div class="div-logo m-auto">
@@ -53,9 +53,9 @@ $dataAgreement = $participant->getData()->DataAgreement;
         </div>
     </div>
 </main>
-<script src="<?=ORIGIN_DIR?>/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    // disabling form submissions if there are invalid fields
     (() => {
         'use strict'
 

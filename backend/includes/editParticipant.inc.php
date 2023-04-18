@@ -14,11 +14,11 @@ if (isset($_POST["submitParticipantEdit"])) {
         'Organiser' => isset($_POST["Organiser"])
     );
 
-    $userID = $_POST["UserID"];
+    $participantID = $_POST["ParticipantID"];
 
     // Update database query
     $participant = new Participant();
-    $participant->update($data, $userID);
+    $participant->update($data, $participantID);
 
 
     // Going back to front page
