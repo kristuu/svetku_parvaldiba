@@ -34,12 +34,13 @@ if (isset($_GET['errors'])) {
 <body>
 <?php include ROOT_DIR . 'public/blocks/header.php' ?>
 <main class="container row g-3 m-auto">
-    <div class="col-12 bg-white rounded mt-lg-4 mt-2 mb-4 pb-5 d-flex flex-column align-items-center text-center">
-        <h1 class="mt-3">Profila datu pārvaldība</h1>
+    <div class="col-12 bg-white rounded pt-3 pb-4 d-flex flex-column align-items-center text-center">
+        <?php include ROOT_DIR . 'public/blocks/logoContainer.php'; ?>
+        <h1 class="w-75 mt-3">PROFILA DATU PĀRVALDĪBAS PANELIS</h1>
         <form class="w-75 row g-3 mt-3 needs-validation" action="<?=BACKEND_DIR?>/includes/editSelf.inc.php" method="POST" novalidate>
             <div class="col-lg-4">
                 <div class="input-group has-validation">
-                    <span class="input-group-text" style="font-family: var(--font-title);"><strong>VĀRDS</strong></span>
+                    <span class="input-group-text" style="font-family: var(--font-title);">VĀRDS</span>
                     <input id="FName" name="FName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participant->getData()->FName; ?>" class="form-control" placeholder="Visi vārdi, ja ir vairāki" required/>
                     <div class="invalid-feedback text-start">
                         Pārliecinies, vai ievadīji vārdu pareizi! (piem., Jānis)
@@ -48,7 +49,7 @@ if (isset($_GET['errors'])) {
             </div>
             <div class="col-lg-4">
                 <div class="input-group has-validation">
-                    <span class="input-group-text" style="font-family: var(--font-title);"><strong>UZVĀRDS</strong></span>
+                    <span class="input-group-text" style="font-family: var(--font-title);">UZVĀRDS</span>
                     <input id="LName" name="LName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participant->getData()->LName; ?>" class="form-control" placeholder="Visi uzvārdi, ja ir vairāki" required/>
                     <div class="invalid-feedback text-start">
                         Pārliecinies, vai ievadīji uzvārdu pareizi! (piem., Bērziņš)
@@ -57,14 +58,14 @@ if (isset($_GET['errors'])) {
             </div>
             <div class="col-lg-4">
                 <div id="PersonCode" class="input-group has-validation" data-bs-toggle="popover">
-                    <span class="input-group-text" style="font-family: var(--font-title);"><strong>PERSONAS KODS</strong></span>
+                    <span class="input-group-text" style="font-family: var(--font-title);">PERSONAS KODS</span>
                     <input disabled type="text" tabindex="0" autocomplete="off" value="<?= $participant->getData()->PersonCode; ?>" class="form-control"/>
                     </span>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="input-group has-validation">
-                    <span class="input-group-text" style="font-family: var(--font-title);"><strong>DZIMŠANAS DATI</strong></span>
+                    <span class="input-group-text" style="font-family: var(--font-title);">DZIMŠANAS DATI</span>
                     <input id="BirthDate" name="BirthDate" type="date" value="<?= $participant->getData()->BirthDate; ?>" class="form-control" required/>
                     <div class="invalid-feedback text-start">
                         Neeksistējošs datums
@@ -73,7 +74,7 @@ if (isset($_GET['errors'])) {
             </div>
             <div class="col-lg-4">
                 <div class="input-group has-validation">
-                    <span class="input-group-text" style="font-family: var(--font-title);"><strong>TĀLRUNIS</strong></span>
+                    <span class="input-group-text" style="font-family: var(--font-title);">TĀLRUNIS</span>
                     <input id="Phone" name="Phone" minlength="8" maxlength="8" data-bs-toggle="popover" type="tel" autocomplete="off" value="<?= $participant->getData()->Phone; ?>" class="form-control" required/>
                     <div class="invalid-feedback text-start">
                         Pārliecinies, vai ievadīji telefona numuru pareizi! (piem., 21234567)
@@ -82,7 +83,7 @@ if (isset($_GET['errors'])) {
             </div>
             <div class="col-lg-4">
                 <div class="input-group has-validation">
-                    <span class="input-group-text" style="font-family: var(--font-title);"><strong>E-PASTS</strong></span>
+                    <span class="input-group-text" style="font-family: var(--font-title);">E-PASTS</span>
                     <input id="Email" name="Email" minlength="5" maxlength="255" data-bs-toggle="popover" type="email" autocomplete="off" value="<?= $participant->getData()->Email; ?>" class="form-control" required/>
                     <div class="invalid-feedback text-start">
                         Pārliecinies, vai ievadīji e-pastu pareizi! (piem., janis.berzins@gmail.com)
@@ -91,7 +92,7 @@ if (isset($_GET['errors'])) {
             </div>
             <div class="col-lg-10">
                 <div class="input-group has-validation">
-                    <label class="input-group-text" for="mainCollectiveInput" style="font-family: var(--font-title);"><strong>GALVENAIS KOLEKTĪVS</strong></label>
+                    <label class="input-group-text" for="mainCollectiveInput" style="font-family: var(--font-title);">GALVENAIS KOLEKTĪVS</label>
                     <select class="form-select" id="mainCollectiveInput" name="MainCollectiveID">
                         <?php
                         $collectives = $participCollectives->getParticipantsCollectives($participant->getData()->ParticipantID);

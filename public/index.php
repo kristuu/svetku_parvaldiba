@@ -27,11 +27,12 @@ $participCollectives = new ParticipCollectives();
 </head>
 <body>
 <?php include ROOT_DIR . 'public/blocks/header.php'; ?>
-<main class="container row g-3 m-auto">
-    <div class="col-12 bg-white rounded d-flex flex-column align-items-center text-center">
+<main class="container row g-3 pb-4 m-auto">
+    <div class="col-12 bg-white rounded pt-3 pb-4 d-flex flex-column align-items-center text-center">
         <?php include ROOT_DIR . 'public/blocks/logoContainer.php'; ?>
         <div class="my-3 w-75 text-start">
-            <h1 style="font-family: var(--font-default);">Esi piekļuvis sistēmai kā <?=$participant->getData()->FName . ' ' . $participant->getData()->LName?></h1>
+            <h1>Esi piekļuvis sistēmai kā <?=$participant->getData()->FName . ' ' . $participant->getData()->LName?></h1>
+            <hr/>
             <h3>Piesaistītie kolektīvi:</h3>
             <ul class="list-group list-group-flush" style="font-family: var(--font-default);">
                 <?php
