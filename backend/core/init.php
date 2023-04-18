@@ -16,7 +16,7 @@ $GLOBALS['config'] = array(
 define('ROOT_DIR', dirname(__FILE__, 3) . '/');
 define('ORIGIN_DIR', '/svetku_parvaldiba');
 define('PUBLIC_DIR', '/svetku_parvaldiba/public');
-define('IMG_DIR', '/svetku_parvaldiba/resources/img');
+define('RESOURCES_DIR', '/svetku_parvaldiba/resources');
 define('BACKEND_DIR', '/svetku_parvaldiba/backend');
 define('ADMIN_DIR', '/svetku_parvaldiba/admin');
 

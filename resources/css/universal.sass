@@ -5,7 +5,17 @@
   --font-title: 'Antonio', sans-serif
   --font-default: 'Work Sans', sans-serif
 
-$my-orange: #ec6136
+$linu-gaisais: #f5f0e3
+$oglu-melnais: #000000
+$dzervenu-sartais: #791121
+$zales-zalais: #1da853
+$ozollapu-zalais: #1b512d
+$smilsu-brunais: #cb9d76
+$saules-dzeltenais: #fab63d
+$magonu-sartais: #ec6136
+$debesu-zilais: #2191fa
+$pelnu-pelekzilais: #94b7bb
+$upes-zilais: #414875
 
 body, html
   width: 100%
@@ -14,9 +24,12 @@ body, html
 
 
 body
+  padding-top: 75px
   margin: 0
-  background-color: $yellow-200 !important
+  background-color: $linu-gaisais !important
 
+header
+  font-family: var(--font-title) !important
 
 h1, h2, h3
   font-family: var(--font-title)
@@ -32,19 +45,22 @@ header h3
   font-family: var(--font-default)
   font-weight: 400
 
+#logoContainer
+  background-color: $magonu-sartais !important
 
-.header-top
-  height: 50px
+  hr
+    color: $oglu-melnais !important
 
-.div-logo
-  width: 80%
+.section-div
+  background-color: #fff
 
 .logo-iss
   display: none
 
+.logo-gars
+  max-height: 120px
+
 @media (max-width: 767.98px)
-  .div-logo
-    width: 75%
 
   .logo-gars
     display: none

@@ -11913,8 +11913,13 @@ body, html {
 }
 
 body {
+  padding-top: 75px;
   margin: 0;
-  background-color: #ffe69c !important;
+  background-color: #f5f0e3 !important;
+}
+
+header {
+  font-family: var(--font-title) !important;
 }
 
 h1, .h1, h2, .h2, h3, .h3 {
@@ -11933,22 +11938,26 @@ header h3, header .h3 {
   font-weight: 400;
 }
 
-.header-top {
-  height: 50px;
+#logoContainer {
+  background-color: #ec6136 !important;
+}
+#logoContainer hr {
+  color: #000000 !important;
 }
 
-.div-logo {
-  width: 80%;
+.section-div {
+  background-color: #fff;
 }
 
 .logo-iss {
   display: none;
 }
 
+.logo-gars {
+  max-height: 120px;
+}
+
 @media (max-width: 767.98px) {
-  .div-logo {
-    width: 75%;
-  }
   .logo-gars {
     display: none;
   }
