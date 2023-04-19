@@ -33,7 +33,7 @@ class ParticipCollectives
 
     public function findCollectiveParticipants($collectiveID = null) {
         if($collectiveID) {
-            $field = 'CollectiveID';
+            $field = 'collectives.CollectiveID';
             $data = $this->_DB->get('participcollectives', array(array($field, '=', $collectiveID)), array(array("INNER", "collectives", "participcollectives.CollectiveID", "collectives.CollectiveID"), array("INNER", "participants", "participcollectives.ParticipantID", "participants.ParticipantID")));
 
             if ($data->getCount()) {

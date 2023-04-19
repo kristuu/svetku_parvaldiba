@@ -11901,9 +11901,109 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+@font-face {
+  font-family: "TT Frantz B";
+  font-family-src: url("resources/fonts/TT-Frantz_B.ttf");
+}
 :root {
   --font-title: "Antonio", sans-serif;
   --font-default: "Work Sans", sans-serif;
+}
+
+.bg-linu-gaisais {
+  background-color: #f5f0e3 !important;
+}
+
+.bg-oglu-melnais {
+  background-color: #000000 !important;
+}
+
+.bg-dzervenu-sartais {
+  background-color: #791121 !important;
+}
+
+.bg-zales-zalais {
+  background-color: #1da853 !important;
+}
+
+.bg-ozollapu-zalais {
+  background-color: #1b512d !important;
+}
+
+.bg-smilsu-brunais {
+  background-color: #cb9d76 !important;
+}
+
+.bg-saules-dzeltenais {
+  background-color: #fab63d !important;
+}
+
+.bg-magonu-sartais {
+  background-color: #ec6136 !important;
+}
+
+.bg-debesu-zilais {
+  background-color: #2191fa !important;
+}
+
+.bg-pelnu-pelekzilais {
+  background-color: #94b7bb !important;
+}
+
+.bg-upes-zilais {
+  background-color: #414875 !important;
+}
+
+.text-linu-gaisais {
+  color: #f5f0e3 !important;
+}
+
+.text-oglu-melnais {
+  color: #000000 !important;
+}
+
+.text-dzervenu-sartais {
+  color: #791121 !important;
+}
+
+.text-zales-zalais {
+  color: #1da853 !important;
+}
+
+.text-ozollapu-zalais {
+  color: #1b512d !important;
+}
+
+.text-smilsu-brunais {
+  color: #cb9d76 !important;
+}
+
+.text-saules-dzeltenais {
+  color: #fab63d !important;
+}
+
+.text-magonu-sartais {
+  color: #ec6136 !important;
+}
+
+.text-debesu-zilais {
+  color: #2191fa !important;
+}
+
+.text-pelnu-pelekzilais {
+  color: #94b7bb !important;
+}
+
+.text-upes-zilais {
+  color: #414875 !important;
+}
+
+.font-title {
+  font-family: var(--font-title) !important;
+}
+
+.font-default {
+  font-family: var(--font-default) !important;
 }
 
 body, html {
@@ -11922,7 +12022,7 @@ header {
   font-family: var(--font-title) !important;
 }
 
-h1, .h1, h2, .h2, h3, .h3 {
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   font-family: var(--font-title);
 }
 
@@ -11940,9 +12040,6 @@ header h3, header .h3 {
 
 #logoContainer {
   background-color: #ec6136 !important;
-}
-#logoContainer hr {
-  color: #000000 !important;
 }
 
 .section-div {
@@ -11963,6 +12060,7 @@ header h3, header .h3 {
   }
   .logo-iss {
     display: inline;
+    max-height: 200px;
   }
   .login-div {
     min-width: 90%;

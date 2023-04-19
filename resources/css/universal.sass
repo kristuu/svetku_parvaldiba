@@ -1,5 +1,8 @@
-@import "../../resources/bootstrap/scss/bootstrap"
+@import "../bootstrap/scss/bootstrap"
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100;200;300;400;500;600;700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap')
+@font-face
+  font-family: "TT Frantz B"
+    src: url("resources/fonts/TT-Frantz_B.ttf")
 
 \:root
   --font-title: 'Antonio', sans-serif
@@ -17,6 +20,78 @@ $debesu-zilais: #2191fa
 $pelnu-pelekzilais: #94b7bb
 $upes-zilais: #414875
 
+.bg-linu-gaisais
+    background-color: $linu-gaisais !important
+
+.bg-oglu-melnais
+    background-color: $oglu-melnais !important
+
+.bg-dzervenu-sartais
+    background-color: $dzervenu-sartais !important
+
+.bg-zales-zalais
+    background-color: $zales-zalais !important
+
+.bg-ozollapu-zalais
+    background-color: $ozollapu-zalais !important
+
+.bg-smilsu-brunais
+    background-color: $smilsu-brunais !important
+
+.bg-saules-dzeltenais
+    background-color: $saules-dzeltenais !important
+
+.bg-magonu-sartais
+    background-color: $magonu-sartais !important
+
+.bg-debesu-zilais
+    background-color: $debesu-zilais !important
+
+.bg-pelnu-pelekzilais
+    background-color: $pelnu-pelekzilais !important
+
+.bg-upes-zilais
+    background-color: $upes-zilais !important
+
+.text-linu-gaisais
+    color: $linu-gaisais !important
+
+.text-oglu-melnais
+    color: $oglu-melnais !important
+
+.text-dzervenu-sartais
+    color: $dzervenu-sartais !important
+
+.text-zales-zalais
+    color: $zales-zalais !important
+
+.text-ozollapu-zalais
+    color: $ozollapu-zalais !important
+
+.text-smilsu-brunais
+    color: $smilsu-brunais !important
+
+.text-saules-dzeltenais
+    color: $saules-dzeltenais !important
+
+.text-magonu-sartais
+    color: $magonu-sartais !important
+
+.text-debesu-zilais
+    color: $debesu-zilais !important
+
+.text-pelnu-pelekzilais
+    color: $pelnu-pelekzilais !important
+
+.text-upes-zilais
+    color: $upes-zilais !important
+
+.font-title
+    font-family: var(--font-title) !important
+
+.font-default
+    font-family: var(--font-default) !important
+
 body, html
   width: 100%
   height: 100%
@@ -31,7 +106,7 @@ body
 header
   font-family: var(--font-title) !important
 
-h1, h2, h3
+h1, h2, h3, h4, h5, h6
   font-family: var(--font-title)
 
 
@@ -47,9 +122,6 @@ header h3
 
 #logoContainer
   background-color: $magonu-sartais !important
-
-  hr
-    color: $oglu-melnais !important
 
 .section-div
   background-color: #fff
@@ -67,6 +139,7 @@ header h3
 
   .logo-iss
     display: inline
+    max-height: 200px
 
   .login-div
     min-width: 90%

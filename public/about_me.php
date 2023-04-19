@@ -33,16 +33,16 @@ if (isset($_GET['errors'])) {
 </head>
 <body>
 <?php include ROOT_DIR . 'public/blocks/header.php' ?>
-<main class="container w-50">
-    <div class="container row g-3 m-auto">
-        <div class="col-12 bg-white rounded pt-3 pb-4 d-flex flex-column align-items-center text-center">
-            <?php include ROOT_DIR . 'public/blocks/logoContainer.php'; ?>
-            <h1 class="w-75 mt-3">PROFILA DATU PĀRVALDĪBAS PANELIS</h1>
-            <form class="w-75 row g-3 mt-3 needs-validation" action="<?=BACKEND_DIR?>/includes/editSelf.inc.php" method="POST" novalidate>
+<main class="container">
+    <?php include ROOT_DIR . 'public/blocks/logoContainer.php'; ?>
+    <div class="my-3 p-3 rounded shadow-sm section-div">
+        <h6 class="border-bottom pb-2 mb-0 fw-bold">PROFILA DATU PĀRVALDĪBAS PANELIS</h6>
+        <div class="my-3 text-center">
+            <form class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/includes/editSelf.inc.php" method="POST" novalidate>
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
-                        <span class="input-group-text" style="font-family: var(--font-title);">VĀRDS</span>
-                        <input id="FName" name="FName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participant->getData()->FName; ?>" class="form-control" placeholder="Visi vārdi, ja ir vairāki" required/>
+                        <span class="input-group-text font-title">VĀRDS</span>
+                        <input id="FName" name="FName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participant->getData()->FName; ?>" class="form-control font-default" placeholder="Visi vārdi, ja ir vairāki" required/>
                         <div class="invalid-feedback text-start">
                             Pārliecinies, vai ievadīji vārdu pareizi! (piem., Jānis)
                         </div>
@@ -50,69 +50,69 @@ if (isset($_GET['errors'])) {
                 </div>
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
-                        <span class="input-group-text" style="font-family: var(--font-title);">UZVĀRDS</span>
-                        <input id="LName" name="LName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participant->getData()->LName; ?>" class="form-control" placeholder="Visi uzvārdi, ja ir vairāki" required/>
-                        <div class="invalid-feedback text-start">
+                        <span class="input-group-text font-title">UZVĀRDS</span>
+                        <input id="LName" name="LName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participant->getData()->LName; ?>" class="form-control font-default" placeholder="Visi uzvārdi, ja ir vairāki" required/>
+                        <div class="invalid-feedback text-start  font-default">
                             Pārliecinies, vai ievadīji uzvārdu pareizi! (piem., Bērziņš)
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div id="PersonCode" class="input-group has-validation" data-bs-toggle="popover">
-                        <span class="input-group-text" style="font-family: var(--font-title);">PERSONAS KODS</span>
-                        <input disabled type="text" tabindex="0" autocomplete="off" value="<?= $participant->getData()->PersonCode; ?>" class="form-control"/>
+                        <span class="input-group-text font-title">PERSONAS KODS</span>
+                        <input disabled type="text" tabindex="0" autocomplete="off" value="<?= $participant->getData()->PersonCode; ?>" class="form-control font-default"/>
                         </span>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
-                        <span class="input-group-text" style="font-family: var(--font-title);">DZIMŠANAS DATI</span>
-                        <input id="BirthDate" name="BirthDate" type="date" value="<?= $participant->getData()->BirthDate; ?>" class="form-control" required/>
-                        <div class="invalid-feedback text-start">
+                        <span class="input-group-text font-title">DZIMŠANAS DATI</span>
+                        <input id="BirthDate" name="BirthDate" type="date" value="<?= $participant->getData()->BirthDate; ?>" class="form-control font-default" required/>
+                        <div class="invalid-feedback text-start font-default">
                             Neeksistējošs datums
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
-                        <span class="input-group-text" style="font-family: var(--font-title);">TĀLRUNIS</span>
-                        <input id="Phone" name="Phone" minlength="8" maxlength="8" data-bs-toggle="popover" type="tel" autocomplete="off" value="<?= $participant->getData()->Phone; ?>" class="form-control" required/>
-                        <div class="invalid-feedback text-start">
+                        <span class="input-group-text font-title">TĀLRUNIS</span>
+                        <input id="Phone" name="Phone" minlength="8" maxlength="8" data-bs-toggle="popover" type="tel" autocomplete="off" value="<?= $participant->getData()->Phone; ?>" class="form-control font-default" required/>
+                        <div class="invalid-feedback text-start font-default">
                             Pārliecinies, vai ievadīji telefona numuru pareizi! (piem., 21234567)
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
-                        <span class="input-group-text" style="font-family: var(--font-title);">E-PASTS</span>
-                        <input id="Email" name="Email" minlength="5" maxlength="255" data-bs-toggle="popover" type="email" autocomplete="off" value="<?= $participant->getData()->Email; ?>" class="form-control" required/>
-                        <div class="invalid-feedback text-start">
+                        <span class="input-group-text font-title">E-PASTS</span>
+                        <input id="Email" name="Email" minlength="5" maxlength="255" data-bs-toggle="popover" type="email" autocomplete="off" value="<?= $participant->getData()->Email; ?>" class="form-control font-default" required/>
+                        <div class="invalid-feedback text-start font-default">
                             Pārliecinies, vai ievadīji e-pastu pareizi! (piem., janis.berzins@gmail.com)
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-10">
                     <div class="input-group has-validation">
-                        <label class="input-group-text" for="mainCollectiveInput" style="font-family: var(--font-title);">GALVENAIS KOLEKTĪVS</label>
-                        <select class="form-select" id="mainCollectiveInput" name="MainCollectiveID">
+                        <label class="input-group-text font-title" for="mainCollectiveInput">GALVENAIS KOLEKTĪVS</label>
+                        <select class="form-select font-default" id="mainCollectiveInput" name="MainCollectiveID">
                             <?php
                             $collectives = $participCollectives->getParticipantsCollectives($participant->getData()->ParticipantID);
                             foreach ($collectives as $object) {
-                                echo "<option value='$object->CollectiveID' ".($object->MainCollective ? 'selected' : '').">$object->CollectiveName</option>";
+                                echo "<option class='font-default' value='$object->CollectiveID' ".($object->MainCollective ? 'selected' : '').">$object->CollectiveName</option>";
                             }
                             ?>
                         </select>
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <button type="submit" name="submitSelfEdit" class="btn btn-outline-success w-100">Saglabāt</button>
+                    <button type="submit" name="submitSelfEdit" class="btn btn-outline-success w-100  font-title">SAGLABĀT</button>
                 </div>
                 <div class="col-lg-12 text-start">
                     <?php
                     if (isset($errorsArray)) {
-                        echo "<p class='error'>KĻŪDAS:</p>";
+                        echo "<p class='error font-title'>KĻŪDAS:</p>";
                         foreach ($errorsArray as $error) {
-                            echo "<p class='error ps-3'>• $error</p>";
+                            echo "<p class='error ps-3 font-title'>• $error</p>";
                         }
                     }
                     ?>
