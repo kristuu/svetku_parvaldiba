@@ -3,13 +3,21 @@
 $backtrace = debug_backtrace();
 
 // Extract information about the requiring file
+$filename = $backtrace[0]['file'];
 $caller = basename($backtrace[0]['file']);
+
+$today = new DateTimeImmutable();
+$festival = new DateTimeImmutable('2023-07-01');
+$daysLeft = $today->diff($festival);
 
 $participant = new Participant();
 ?>
 
 <head>
+    <link rel="stylesheet" href="<?=RESOURCES_DIR?>/css/universal.css"/>
     <link rel="stylesheet" href="<?=RESOURCES_DIR?>/css/offcanvas-navbar.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 </head>
 <header>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Navigation bar">
@@ -39,7 +47,7 @@ $participant = new Participant();
                     if ($participant->getData()->Organiser):
                         ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?=ADMIN_DIR?>/public/index.php" aria-current="page"><strong>ADMIN</strong></a>
+                            <a class="nav-link <?= str_contains($filename, 'admin') ? 'active' : ''; ?>" href="<?=ADMIN_DIR?>/public/index.php" aria-current="page"><strong>ADMIN</strong></a>
                         </li>
                     <?php endif; ?>
                 </ul>
@@ -60,6 +68,21 @@ $participant = new Participant();
             </div>
         </div>
     </nav>
+    <div class="nav-scroller bg-dzervenu-sartais shadow-sm">
+        <nav class="nav">
+                <div class="lh-sm w-100 text-center m-auto">
+                    <img class="logo-gars img-fluid" style="max-height: 100px" src="<?=RESOURCES_DIR?>/img/gaiss/logo-rinda.png"/>
+                    <img class="logo-iss img-fluid" src="<?=RESOURCES_DIR?>/img/gaiss/logo-kompakts.png"/>
+            </div>
+        </nav>
+    </div>
+    <div class="nav-scroller bg-white shadow-sm">
+        <nav class="nav">
+            <div class="lh-sm w-100 py-2 d-flex align-items-center justify-content-center">
+                <span class="d-block text-dzervenu-sartais font-title"><strong>LĪDZ SVĒTKIEM ATLIKUŠO DIENU SKAITS: </strong><?=$daysLeft->format('%a')?></span>
+            </div>
+        </nav>
+    </div>
 </header>
 <script>
     (() => {
@@ -70,3 +93,4 @@ $participant = new Participant();
         })
     })()
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

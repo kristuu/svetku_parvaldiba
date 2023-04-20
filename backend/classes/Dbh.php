@@ -82,6 +82,19 @@ class Dbh
         return FALSE;
     }
 
+
+    public function getAsocTablesHeaders($table) {
+        $sql = "SHOW COLUMNS FROM {$table}";
+        if (!$this->query($sql)->_error) {
+            $columnNames = array();
+            foreach ($this->_results as $result) {
+                $columnNames[] = $result->Field;
+            }
+            return $columnNames;
+        }
+        return FALSE;
+    }
+
     public function get($table, $where = array(), $joins = array())
     {
         return $this->action("SELECT *", $table, $where, $joins);
