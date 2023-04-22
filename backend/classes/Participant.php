@@ -4,7 +4,6 @@ class Participant
 {
     private Dbh $_DB;
     private $_data;
-    private $_queryData;
     private bool $_isLoggedIn = false;
 
     public function __construct($user = null) {
@@ -35,30 +34,17 @@ class Participant
 
             if ($data->getCount()) {
                 $this->_data = $data->getResults()[0];
-                return TRUE;
+                return $this->_data;
             }
         }
         return FALSE;
     }
 
-    public function getUser($user = null) {
-        if ($user) {
-            $field = 'UserID';
-            $data = $this->_DB->get('participants', array(array($field, '=', $user)));
-
-            if ($data->getCount()) {
-                $this->_queryData = $data->getResults()[0];
-                return $this->_queryData;
-            }
-        }
-        return FALSE;
-    }
-
-    public function getAllUsers() {
+    public function getAllParticipants() {
         $data = $this->_DB->get('participants');
         if ($data->getCount()) {
-            $this->_queryData = $data->getResults();
-            return $this->_queryData;
+            $this->_data = $data->getResults();
+            return $this->_data;
         }
         return 'No participants in table.';
     }

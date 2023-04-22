@@ -16,22 +16,15 @@ $pCollectiveList = $participCollectives->getParticipantsCollectives($participant
 
 <!DOCTYPE html>
 <html lang="lv">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pārvaldības sistēma | XXVII Vispārējie latviešu Dziesmu un XVII Deju svētki</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
-</head>
+<?php include ROOT_DIR . '/backend/includes/head.inc.php'; ?>
 <body>
 <?php include ROOT_DIR . 'public/blocks/header.php'; ?>
 <main class="container">
     <?php include ROOT_DIR . 'public/blocks/logoContainer.php'; ?>
     <div class="my-3 p-3 rounded shadow-sm section-div">
         <h6 class="border-bottom pb-2 mb-0 fw-bold">Tavi kolektīvi:</h6>
-        <?php foreach($pCollectiveList as $collective):
+        <?php
+        foreach($pCollectiveList as $collective):
             $cParticipants = $participCollectives->getCollectiveParticipants($collective->CollectiveID);
         ?>
         <div class="d-flex text-body-secondary pt-3">
@@ -55,4 +48,5 @@ $pCollectiveList = $participCollectives->getParticipantsCollectives($participant
     </div>
 </main>
 </body>
+
 </html>

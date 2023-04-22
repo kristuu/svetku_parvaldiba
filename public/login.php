@@ -59,7 +59,7 @@ if(isset($errorMessage)) {
 </div>
 <div id="login-section" class="container-fluid">
     <div class="login-div m-auto">
-        <form action="../backend/includes/login.inc.php" method="POST">
+        <form action="../backend/loginHandler.php" method="POST">
             <div id="login-block" class="d-flex flex-column align-items-center">
                 <img class="login-symbol" src="../resources/img/logo-simbols.svg">
                 <div class="div-input d-flex flex-column">

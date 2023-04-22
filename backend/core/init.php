@@ -18,7 +18,7 @@ define('ORIGIN_DIR', '/svetku_parvaldiba');
 define('PUBLIC_DIR', '/svetku_parvaldiba/public');
 define('RESOURCES_DIR', '/svetku_parvaldiba/resources');
 define('BACKEND_DIR', '/svetku_parvaldiba/backend');
-define('ADMIN_DIR', '/svetku_parvaldiba/admin');
+define('ADMIN_DIR', '/svetku_parvaldiba/backend/admin');
 
 spl_autoload_register(function ($class) {
     require_once (ROOT_DIR . 'backend/classes/' . $class . '.php');

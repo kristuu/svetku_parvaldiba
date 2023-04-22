@@ -2,9 +2,10 @@
 
 require_once '../core/init.php';
 
-if (isset($_POST["submitParticipantEdit"])) {
+if (isset($_POST["submitEdit"])) {
     // Acquire the data
-    $data = array(
+    $data = array(array(
+        'ParticipantID' => $_POST["ParticipantID"],
         'FName' => $_POST["FName"],
         'LName' => $_POST["LName"],
         'PersonCode' => $_POST["PersonCode"],
@@ -12,9 +13,7 @@ if (isset($_POST["submitParticipantEdit"])) {
         'Phone' => $_POST["Phone"],
         'Email' => $_POST["Email"],
         'Organiser' => isset($_POST["Organiser"])
-    );
-
-    $participantID = $_POST["ParticipantID"];
+    ));
 
     // Update database query
     $participant = new Participant();
@@ -22,8 +21,8 @@ if (isset($_POST["submitParticipantEdit"])) {
 
 
     // Going back to front page
-    header("Location: ../admin/participants.php");
+    header("Location: " . ADMIN_DIR . "/public/participants.php");
 
-} else {
-    echo "no post set";
 }
+
+

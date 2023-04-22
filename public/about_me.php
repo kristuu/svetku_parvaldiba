@@ -20,17 +20,7 @@ if (isset($_GET['errors'])) {
 
 <!DOCTYPE html>
 <html lang="lv">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mani dati | XXVII Vispārējie latviešu Dziesmu un XVII Deju svētki</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?=RESOURCES_DIR?>/css/universal.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-</head>
+<?php include ROOT_DIR . '/backend/includes/head.inc.php'; ?>
 <body>
 <?php include ROOT_DIR . 'public/blocks/header.php' ?>
 <main class="container">
@@ -38,7 +28,7 @@ if (isset($_GET['errors'])) {
     <div class="my-3 p-3 rounded shadow-sm section-div">
         <h6 class="border-bottom pb-2 mb-0 fw-bold">PROFILA DATU PĀRVALDĪBAS PANELIS</h6>
         <div class="my-3 text-center">
-            <form class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/includes/editSelf.inc.php" method="POST" novalidate>
+            <form class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/updateHandlers/updateSelf.php" method="POST" novalidate>
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
                         <span class="input-group-text font-title">VĀRDS</span>
@@ -122,69 +112,6 @@ if (isset($_GET['errors'])) {
     </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-<script>
-    const popovers = <?=json_encode($restrictionPopovers)?>;
-    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-    popoverTriggerList.forEach((inputField) => {
-        if (inputField.id !== "PersonCode") {
-            inputField.setAttribute("data-bs-trigger", popovers["TriggerType"]);
-        } else {
-            inputField.setAttribute("data-bs-trigger", "hover focus");
-        }
-        inputField.setAttribute("data-bs-title", popovers["Title"]);
-        inputField.setAttribute("data-bs-content", popovers[inputField.id]);
-        inputField.setAttribute("data-bs-html", "true");
-    });
-    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-</script>
-<script>
-    // disabling form submissions if there are invalid fields
-    (() => {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.classList.add('was-validated')
-            }, false)
-        })
-    })()
-</script>
-<script>
-    function addInputGroupClass() {
-        const screenWidth = window.innerWidth;
-        const inputGroups = document.querySelectorAll('.input-group');
-        const buttons = document.querySelectorAll('.btn');
-
-        if (screenWidth < 1200) {
-            inputGroups.forEach((inputGroup) => {
-                inputGroup.classList.add('input-group-sm');
-            });
-            buttons.forEach((button) => {
-                button.classList.add('btn-sm');
-            });
-        } else {
-            inputGroups.forEach((inputGroup) => {
-                inputGroup.classList.remove('input-group-sm');
-            });
-            buttons.forEach((button) => {
-                button.classList.remove('btn-sm');
-            });
-        }
-    }
-
-    window.addEventListener('resize', addInputGroupClass);
-
-    // Call addInputGroupClass on page load to apply the class initially
-    addInputGroupClass();
-</script>
+<?php include ROOT_DIR . 'backend/includes/editFormScripts.php'; ?>
 </body>
 </html>

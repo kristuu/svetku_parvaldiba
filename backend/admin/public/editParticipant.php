@@ -1,65 +1,110 @@
 <?php
-require_once '../core/init.php';
+require_once '../../core/init.php';
+require_once(ROOT_DIR . 'backend/includes/editPerson.inc.php');
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
 }
+
+// check if the user has agreed to the rules and data processing, if not, redirect them to agreement page
+require_once ROOT_DIR . 'backend/core/checkAgreement.php';
+
 $participant = new Participant();
-$participantData = $participant->getUser($_GET["id"]);
+$participantData = $participant->findUser($_GET["id"]);
+
+// Check if the user is an administrator
+if (!$participant->getData()->Organiser) {
+    header("Location: ". PUBLIC_DIR ."/index.php");
+}
+
+if (isset($_GET['errors'])) {
+    $errors = urldecode($_GET['errors']);
+    parse_str($errors, $errorsArray);
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="lv">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rediģēt dalībnieku | XXVII Vispārējie latviešu Dziesmu un XVII Deju svētki</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../../resources/css/universal.css"/>
-    <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<?php include ROOT_DIR . '/backend/includes/head.inc.php'; ?>
 <body>
-<?php include ROOT_DIR . 'public/header.php' ?>
+<?php include ROOT_DIR . 'public/blocks/header.php' ?>
 <main class="container">
-    <div class="w-100 bg-white rounded mt-lg-4 mt-2 d-flex flex-column align-items-center text-center">
-        <h1 class="mt-3">Profila datu pārvaldība</h1>
-        <form class="w-75" action="../../includes/editParticipant.inc.php" method="POST">
-            <div class="my-3 text-start">
-                <input name="UserID" hidden value="<?=$participantData->UserID?>"/>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" style="font-family: var(--font-title);"><strong>Vārds, uzvārds</strong></span>
-                    <input name="FName" type="text" value="<?= $participantData->FName; ?>" class="form-control" placeholder="Visi vārdi, ja ir vairāki"/>
-                    <input name="LName" type="text" value="<?= $participantData->LName; ?>" class="form-control" placeholder="Visi uzvārdi, ja ir vairāki"/>
+    <?php include ROOT_DIR . 'public/blocks/logoContainer.php'; ?>
+    <div class="my-3 p-3 rounded shadow-sm section-div">
+        <h6 class="border-bottom pb-2 mb-0 fw-bold">DALĪBNIEKA DATU PĀRVALDĪBAS PANELIS</h6>
+        <div class="my-3 text-center">
+            <form class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/updateHandlers/updateParticipant.php" method="POST" novalidate>
+                <div class="col-lg-4">
+                    <div class="input-group has-validation">
+                        <span class="input-group-text font-title">VĀRDS</span>
+                        <input hidden name="ParticipantID" value="<?= $participantData->ParticipantID; ?>"/>
+                        <input id="FName" name="FName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participantData->FName; ?>" class="form-control font-default" placeholder="Visi vārdi, ja ir vairāki" required/>
+                        <div class="invalid-feedback text-start">
+                            Pārliecinies, vai ievadīji vārdu pareizi! (piem., Jānis)
+                        </div>
+                    </div>
                 </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" style="font-family: var(--font-title);"><strong>Personas kods</strong></span>
-                    <input name="PersonCode" type="text" value="<?= $participantData->PersonCode; ?>" class="form-control"/>
+                <div class="col-lg-4">
+                    <div class="input-group has-validation">
+                        <span class="input-group-text font-title">UZVĀRDS</span>
+                        <input id="LName" name="LName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participantData->LName; ?>" class="form-control font-default" placeholder="Visi uzvārdi, ja ir vairāki" required/>
+                        <div class="invalid-feedback text-start  font-default">
+                            Pārliecinies, vai ievadīji uzvārdu pareizi! (piem., Bērziņš)
+                        </div>
+                    </div>
                 </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" style="font-family: var(--font-title);"><strong>Dzimšanas datums</strong></span>
-                    <input name="BirthDate" type="date" value="<?= $participantData->BirthDate; ?>" class="form-control"/>
+                <div class="col-lg-4">
+                    <div class="input-group has-validation" data-bs-toggle="popover">
+                        <span class="input-group-text font-title">PERSONAS KODS</span>
+                        <input id="PersonCode" name="PersonCode" type="text" tabindex="0" autocomplete="off" value="<?= $participantData->PersonCode; ?>" class="form-control font-default"/>
+                        </span>
+                    </div>
                 </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" style="font-family: var(--font-title);"><strong>Kontaktinformācija</strong></span>
-                    <input name="Phone" type="tel" value="<?= $participantData->Phone; ?>" class="form-control"/>
-                    <input name="Email" type="email" value="<?= $participantData->Email; ?>" class="form-control"/>
+                <div class="col-lg-4">
+                    <div class="input-group has-validation">
+                        <span class="input-group-text font-title">DZIMŠANAS DATI</span>
+                        <input id="BirthDate" name="BirthDate" type="date" value="<?= $participantData->BirthDate; ?>" class="form-control font-default" required/>
+                        <div class="invalid-feedback text-start font-default">
+                            Neeksistējošs datums
+                        </div>
+                    </div>
                 </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" style="font-family: var(--font-title);"><strong>Parole</strong></span>
-                    <input name="Password" type="tel" value="<?= $participantData->Password; ?>" class="form-control"/>
+                <div class="col-lg-4">
+                    <div class="input-group has-validation">
+                        <span class="input-group-text font-title">TĀLRUNIS</span>
+                        <input id="Phone" name="Phone" minlength="8" maxlength="8" data-bs-toggle="popover" type="tel" autocomplete="off" value="<?= $participantData->Phone; ?>" class="form-control font-default" required/>
+                        <div class="invalid-feedback text-start font-default">
+                            Pārliecinies, vai ievadīji telefona numuru pareizi! (piem., 21234567)
+                        </div>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="Organiser" <?=$participantData->Organiser ? 'checked' : '';?>>
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Organizators</label>
+                <div class="col-lg-4">
+                    <div class="input-group has-validation">
+                        <span class="input-group-text font-title">E-PASTS</span>
+                        <input id="Email" name="Email" minlength="5" maxlength="255" data-bs-toggle="popover" type="email" autocomplete="off" value="<?= $participantData->Email; ?>" class="form-control font-default" required/>
+                        <div class="invalid-feedback text-start font-default">
+                            Pārliecinies, vai ievadīji e-pastu pareizi! (piem., janis.berzins@gmail.com)
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" name="submitParticipantEdit" class="btn btn-outline-success ms-auto">Saglabāt</button>
-            </div>
-        </form>
+                <div class="col-lg-2">
+                    <button type="submit" name="submitEdit" class="btn btn-outline-success w-100  font-title">SAGLABĀT</button>
+                </div>
+                <div class="col-lg-12 text-start">
+                    <?php
+                    if (isset($errorsArray)) {
+                        echo "<p class='error font-title'>KĻŪDAS:</p>";
+                        foreach ($errorsArray as $error) {
+                            echo "<p class='error ps-3 font-title'>• $error</p>";
+                        }
+                    }
+                    ?>
+                </div>
+            </form>
+        </div>
     </div>
 </main>
-<script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<?php include ROOT_DIR . 'backend/includes/editFormScripts.php'; ?>
 </body>
 </html>

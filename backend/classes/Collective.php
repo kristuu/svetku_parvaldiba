@@ -10,19 +10,10 @@ class Collective
         $this->_DB = Dbh::getInstance();
     }
 
-    public function getTableHeaders() {
-        $headers = $this->_DB->getAsocTablesHeaders('collectives');
-        if ($headers) {
-            return $headers;
-        } else {
-            return 'None found.';
-        }
-    }
-
     public function findCollective($collectiveID = null) {
         if($collectiveID) {
             $field = 'CollectiveID';
-            $data = $this->_DB->get('collectives', array(array($field, '=', $collectiveID)));
+            $data = $this->_DB->get('collectives', array(array($field, '=', $collectiveID)), array(array('INNER', 'regions', 'collectives.RegionID', 'regions.RegionID'), array('INNER', 'categories', 'collectives.CategoryID', 'categories.CategoryID')));
             if ($data->getCount()) {
                 $this->_data = $data->getResults()[0];
                 return TRUE;
@@ -40,7 +31,7 @@ class Collective
     }
 
     public function getAllCollectives() {
-        $data = $this->_DB->get('collectives');
+        $data = $this->_DB->get('collectives', array(), array(array('INNER', 'regions', 'collectives.RegionID', 'regions.RegionID'), array('INNER', 'categories', 'collectives.CategoryID', 'categories.CategoryID')));
         if ($data->getCount()) {
             $this->_data = $data->getResults();
             return $this->_data;
