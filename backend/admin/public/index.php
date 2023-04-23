@@ -29,13 +29,31 @@ $pCollectiveList = $participCollectives->getParticipantsCollectives($participant
     <?php include ROOT_DIR . 'public/blocks/logoContainer.php'; ?>
     <div class="my-3 p-3 rounded shadow-sm section-div">
         <h6 class="border-bottom pb-2 mb-0 fw-bold">Pārvaldība:</h6>
-        <div class="row g-3">
+        <div class="row g-3 mx-auto mt-auto">
             <div class="col-sm-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Kolektīvi</h5>
-                        <p class="card-text">Pārvaldīt kolektīvus</p>
-                        <a href="collectives.php" class="btn btn-outline-success">Pārvaldīt</a>
+                        <p class="card-text">Sistēmā ievadītie kolektīvi</p>
+                        <a href="collectives.php" class="btn btn-outline-success font-title">PĀRVALDĪT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Dalībnieki</h5>
+                        <p class="card-text">Sistēmā ievadītie dalībnieki</p>
+                        <a href="participants.php" class="btn btn-outline-success font-title">PĀRVALDĪT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Kolektīvu kategorijas</h5>
+                        <p class="card-text">Kolektīviem atbilstošās kategorijas</p>
+                        <a href="categories.php" class="btn btn-outline-success font-title">PĀRVALDĪT</a>
                     </div>
                 </div>
             </div>
