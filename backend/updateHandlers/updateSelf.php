@@ -47,24 +47,102 @@ if (isset($_POST["submitSelfEdit"])) {
         }
     }
 
+    if (isset($_FILES["ProfilePic"]) && $_FILES["ProfilePic"]["error"] == 0) {
+        $file_name = $_FILES["ProfilePic"]["type"];
+        $validate->isImage($file_name);
+    }
+
     if ($validate->getErrors()) {
         $errorsString = urlencode(http_build_query($validate->getErrors()));
-        header("Location: ". PUBLIC_DIR ."/about_me.php?errors=".$errorsString, true, 303);
+        header("Location: " . PUBLIC_DIR . "/about_me.php?errors=" . $errorsString, true, 303);
         exit;
     }
 
     $collectiveID = $_POST["MainCollectiveID"];
-
-    // Update database query
-    $participant = new Participant();
-    $participCollectives = new ParticipCollectives();
-    $participant->update($data);
-    $participCollectives->updateParticipantsMainCollective($collectiveID);
+    $profilePic = '';
 
 
-    // Going back to front page
-    header("Location: ". PUBLIC_DIR ."/index.php");
+    if (isset($_FILES["ProfilePic"]) && $_FILES["ProfilePic"]["error"] == 0) {
+        $participant = new Participant();
 
-} else {
-    header("Location: ". PUBLIC_DIR ."/about_me.php");
+        if (!empty($participant->getData()->ProfilePic)) {
+            $oldProfilePic = ROOT_DIR . "resources/img/participantPics/" . $participant->getData()->ProfilePic;
+            unlink($oldProfilePic);
+        }
+
+        $target_dir = ROOT_DIR . "resources/img/participantPics/";
+        $file_name = basename($_FILES["ProfilePic"]["name"]);
+        $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        $unique_name = time() . uniqid(rand());
+        $target_file = $target_dir . $unique_name . '.' . $file_type;
+
+        if (in_array($file_type, array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg', 'tiff'))) {
+            // Load the uploaded image based on the file extension
+            switch ($file_type) {
+                case 'jpg':
+                case 'jpeg':
+                    $uploadedImage = imagecreatefromjpeg($_FILES["ProfilePic"]['tmp_name']);
+                    break;
+                case 'png':
+                    $uploadedImage = imagecreatefrompng($_FILES["ProfilePic"]['tmp_name']);
+                    break;
+                case 'gif':
+                    $uploadedImage = imagecreatefromgif($_FILES["ProfilePic"]['tmp_name']);
+                    break;
+                case 'bmp':
+                    $uploadedImage = imagecreatefrombmp($_FILES["ProfilePic"]['tmp_name']); // Requires a separate function for BMP images
+                    break;
+                case 'webp':
+                    $uploadedImage = imagecreatefromwebp($_FILES["ProfilePic"]['tmp_name']);
+                    break;
+            }
+
+            // Get the original dimensions of the uploaded image
+            $originalWidth = imagesx($uploadedImage);
+            $originalHeight = imagesy($uploadedImage);
+
+            // Calculate the new dimensions for the 2:3 aspect ratio
+            $newWidth = $originalHeight * 2 / 3;
+            $newHeight = $originalHeight;
+
+            // Calculate the x-coordinate for cropping
+            $cropX = ($originalWidth - $newWidth) / 2;
+
+            // Create a new image with the new dimensions
+            $newImage = imagecreatetruecolor($newWidth, $newHeight);
+
+            // Copy and resize the original image to the new image with cropping
+            imagecopyresampled($newImage, $uploadedImage, 0, 0, $cropX, 0, $newWidth, $newHeight, $newWidth, $newHeight);
+
+            // Create a new filename for the converted JPEG image
+            $newFilename = 'new_filename.jpg'; // Replace 'new_filename' with the desired name for the converted image
+
+            // Save the converted image as JPEG
+            imagejpeg($newImage, $newFilename, 100); // You can adjust the quality (0-100) as needed
+
+            // Free up memory by destroying the image resources
+            imagedestroy($uploadedImage);
+            imagedestroy($newImage);
+
+            if (move_uploaded_file(imagejpeg($_FILES["ProfilePic"]["tmp_name"]), $target_file)) {
+                $profilePic = $unique_name . '.' . $file_type;
+                $data[0]["ProfilePic"] = $profilePic;
+            } else {
+                die('Profile picture upload failed');
+            }
+        }
+
+        // Update database query
+        $participant = new Participant();
+        $participCollectives = new ParticipCollectives();
+        $participant->update($data);
+        $participCollectives->updateParticipantsMainCollective($collectiveID);
+
+
+        // Going back to front page
+        header("Location: " . PUBLIC_DIR . "/index.php");
+
+    } else {
+        header("Location: " . PUBLIC_DIR . "/about_me.php");
+    }
 }

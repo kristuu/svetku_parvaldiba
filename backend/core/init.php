@@ -17,6 +17,9 @@ define('ROOT_DIR', dirname(__FILE__, 3) . '/');
 define('ORIGIN_DIR', '/svetku_parvaldiba');
 define('PUBLIC_DIR', '/svetku_parvaldiba/public');
 define('RESOURCES_DIR', '/svetku_parvaldiba/resources');
+define('POSTIMG_DIR', '/svetku_parvaldiba/resources/img/postPics');
+define('PARTICIPIMG_DIR', '/svetku_parvaldiba/resources/img/participantPics');
+define('COLLECTIVELOGOS_DIR', '/svetku_parvaldiba/resources/img/ollectiveLogos');
 define('BACKEND_DIR', '/svetku_parvaldiba/backend');
 define('ADMIN_DIR', '/svetku_parvaldiba/backend/admin');
 

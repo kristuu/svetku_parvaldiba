@@ -1,6 +1,7 @@
 <?php
 require_once '../backend/core/init.php';
 require_once(ROOT_DIR . 'backend/includes/editPerson.inc.php');
+require_once(ROOT_DIR . 'backend/includes/restrictionPopovers.inc.php');
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
@@ -28,7 +29,21 @@ if (isset($_GET['errors'])) {
     <div class="my-3 p-3 rounded shadow-sm section-div">
         <h6 class="border-bottom pb-2 mb-0 fw-bold">PROFILA DATU PĀRVALDĪBAS PANELIS</h6>
         <div class="my-3 text-center">
-            <form class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/updateHandlers/updateSelf.php" method="POST" novalidate>
+            <form id="editForm" enctype="multipart/form-data" class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/updateHandlers/updateSelf.php" method="POST" novalidate>
+                <div class="col-12">
+                    <div id="ProfilePhotoContainer" class="w-100">
+                        <img <?= is_null($participant->getData()->ProfilePic) ? 'hidden' : ''; ?> id="ProfilePhoto" style="max-height: 200px;" src="<?= PARTICIPIMG_DIR . '/' . $participant->getData()->ProfilePic ?>">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="input-group has-validation">
+                        <span class="input-group-text font-title">FOTO</span>
+                        <input id="ProfilePic" name="ProfilePic" type="file" accept="image/*" value="<?= $participant->getData()->FName; ?>" class="form-control font-default"/>
+                        <div class="invalid-feedback text-start">
+                            Foto ir obligāts!
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
                         <span class="input-group-text font-title">VĀRDS</span>
@@ -111,7 +126,6 @@ if (isset($_GET['errors'])) {
         </div>
     </div>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <?php include ROOT_DIR . 'backend/includes/editFormScripts.php'; ?>
 </body>
 </html>

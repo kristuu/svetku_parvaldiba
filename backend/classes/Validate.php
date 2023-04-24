@@ -152,6 +152,16 @@ class Validate
         return $this->errors ?? TRUE;
     }
 
+    public function isImage(string $string)
+    {
+        if (str_starts_with($string, "image")) {
+            return TRUE;
+        } else {
+            $this->addError("Foto", "image");
+            return FALSE;
+        }
+    }
+
     public function cleanInput(string $string) : string
     {
         // Trim function removes whitespace from beginning and end of string
@@ -194,6 +204,9 @@ class Validate
                 break;
             case "noNumbers":
                 $errorString .= "nedrīkst saturēt ciparus;";
+                break;
+            case "image":
+                $errorString .= "jābūt attēlam;";
                 break;
             default:
                 $errorString .= "nedefinēta kļūda: {$restriction};";
