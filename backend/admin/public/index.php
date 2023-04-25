@@ -51,9 +51,27 @@ $pCollectiveList = $participCollectives->getParticipantsCollectives($participant
             <div class="col-sm-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Kolektīvu kategorijas</h5>
+                        <h5 class="card-title">Kategorijas</h5>
                         <p class="card-text">Kolektīviem atbilstošās kategorijas</p>
                         <a href="categories.php" class="btn btn-outline-success font-title">PĀRVALDĪT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Reģioni</h5>
+                        <p class="card-text">Kolektīviem atbilstošie reģioni</p>
+                        <a href="regions.php" class="btn btn-outline-success font-title">PĀRVALDĪT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Dalībnieki - Kolektīvi</h5>
+                        <p class="card-text">Dalībnieku saistījums ar kolektīviem</p>
+                        <a href="participCollectives.php" class="btn btn-outline-success font-title">PĀRVALDĪT</a>
                     </div>
                 </div>
             </div>

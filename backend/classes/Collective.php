@@ -16,18 +16,10 @@ class Collective
             $data = $this->_DB->get('collectives', array(array($field, '=', $collectiveID)), array(array('INNER', 'regions', 'collectives.RegionID', 'regions.RegionID'), array('INNER', 'categories', 'collectives.CategoryID', 'categories.CategoryID')));
             if ($data->getCount()) {
                 $this->_data = $data->getResults()[0];
-                return TRUE;
+                return $this->_data;
             }
         }
         return FALSE;
-    }
-
-    public function getCollective($collectiveID = null) {
-        if ($this->findCollective($collectiveID)) {
-            return $this->_data;
-        } else {
-            return 'None found.';
-        }
     }
 
     public function getAllCollectives() {
@@ -42,13 +34,18 @@ class Collective
 
     public function createCollective(array $fields) {
         if ($this->_DB->insert('collectives', $fields)) {
-            throw new \mysql_xdevapi\Exception('There was a problem creating a collective.');
+            return TRUE;
+        } else {
+            die('Error creating collective.');
         }
     }
 
     public function updateCollective(array $data, int $id) {
         if ($id) {
             $this->_DB->update('collectives', $data, array(array('CollectiveID', '=', $id)));
+            return TRUE;
+        } else {
+            die('Error updating collective.');
         }
     }
 

@@ -33,7 +33,7 @@ if (!$participant->findUser()->Organiser) {
         <h6 class="border-bottom pb-2 mb-0 fw-bold">DALĪBNIEKU PĀRVALDĪBAS PANELIS</h6>
         <div class="my-3">
             <div class="card-body">
-                <button class="btn btn-outline-dark w-100 font-title mb-3" href="#" onclick="location.href='addParticipant.php'">Pievienot dalībnieku</button>
+                <button class="btn btn-outline-dark w-100 font-title mb-3" href="#" onclick="location.href='addParticipant.php'">PIEVIENOT DALĪBNIEKU</button>
                 <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4 font-default">
                     <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
                         <thead class="font-title">
@@ -69,7 +69,7 @@ if (!$participant->findUser()->Organiser) {
                             echo "<td>" . $participantx->Organiser . "</td>";
                             echo "<td>";
                             echo "<button class='btn btn-warning me-3' onclick=\"location.href='editParticipant.php?id=" . $participantx->ParticipantID . "'\">Labot</button>";
-                            echo "<button " . ($participantx->ParticipantID === $participant->findUser()->ParticipantID ? 'disabled' : '') . " class='btn btn-danger' onclick=\"location.href='deleteParticipant.php?id=" . $participantx->ParticipantID . "'\">Dzēst</button>";
+                            echo "<a " . ($participantx->ParticipantID === $participant->findUser()->ParticipantID ? 'disabled' : '') . " class='btn btn-danger' href='" . BACKEND_DIR . "/handlers/deleteHandlers/deleteParticipant.php?id=" . $participantx->ParticipantID . "'\">Dzēst</a>";
                             echo "</td>";
                             echo "</tr>";
                             $x++;

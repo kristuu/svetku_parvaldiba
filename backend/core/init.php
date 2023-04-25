@@ -19,7 +19,7 @@ define('PUBLIC_DIR', '/svetku_parvaldiba/public');
 define('RESOURCES_DIR', '/svetku_parvaldiba/resources');
 define('POSTIMG_DIR', '/svetku_parvaldiba/resources/img/postPics');
 define('PARTICIPIMG_DIR', '/svetku_parvaldiba/resources/img/participantPics');
-define('COLLECTIVELOGOS_DIR', '/svetku_parvaldiba/resources/img/ollectiveLogos');
+define('COLLECTIVELOGOS_DIR', '/svetku_parvaldiba/resources/img/collectiveLogos');
 define('BACKEND_DIR', '/svetku_parvaldiba/backend');
 define('ADMIN_DIR', '/svetku_parvaldiba/backend/admin');
 

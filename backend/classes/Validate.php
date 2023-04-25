@@ -6,9 +6,10 @@ class Validate
 
 
     // Check if the provided variable's value is empty
-    public function isEmpty(mixed $value): bool
+    public function isEmpty(string $field, mixed $value): bool
     {
         if (empty($value)) {
+            $this->addError($field, "empty");
             return TRUE;
         } else {
             return FALSE;
@@ -207,6 +208,9 @@ class Validate
                 break;
             case "image":
                 $errorString .= "jābūt attēlam;";
+                break;
+            case "empty":
+                $errorString .= "nedrīkst būt tukšs;";
                 break;
             default:
                 $errorString .= "nedefinēta kļūda: {$restriction};";

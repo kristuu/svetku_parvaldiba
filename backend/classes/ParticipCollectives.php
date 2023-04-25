@@ -52,9 +52,20 @@ class ParticipCollectives
         }
     }
 
-    public function updateParticipantsMainCollective(string $mainCollectiveID) {
-        $user = new Participant();
-        $userID = $user->getData()->ParticipantID;
+    public function getAllParticipantsCollectives() {
+        $data = $this->_DB->get('participcollectives', array(), array(array("INNER", "collectives", "participcollectives.CollectiveID", "collectives.CollectiveID"), array("INNER", "participants", "participcollectives.ParticipantID", "participants.ParticipantID")));
+        if ($data->getCount()) {
+            $this->_data = $data->getResults();
+            return $this->_data;
+        }
+        return FALSE;
+    }
+
+    public function updateParticipantsMainCollective(string $mainCollectiveID, int $userID = null) {
+        if ($userID === null) {
+            $user = new Participant();
+            $userID = $user->getData()->ParticipantID;
+        }
         $this->_DB->update('participcollectives', array(array('MainCollective' => 0)), array(array('ParticipantID', '=', $userID)));
         $this->_DB->update('participcollectives', array(array('MainCollective' => 1)), array(array('ParticipantID', '=', $userID), array('CollectiveID', '=', $mainCollectiveID)));
     }

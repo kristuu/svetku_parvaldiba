@@ -1,6 +1,6 @@
 <?php
 require_once '../backend/core/init.php';
-require_once(ROOT_DIR . 'backend/includes/editPerson.inc.php');
+require_once(ROOT_DIR . 'backend/includes/editFields.inc.php');
 require_once(ROOT_DIR . 'backend/includes/restrictionPopovers.inc.php');
 
 if (!isset($_SESSION["user_id"])) {
@@ -38,10 +38,7 @@ if (isset($_GET['errors'])) {
                 <div class="col-12">
                     <div class="input-group has-validation">
                         <span class="input-group-text font-title">FOTO</span>
-                        <input id="ProfilePic" name="ProfilePic" type="file" accept="image/*" value="<?= $participant->getData()->FName; ?>" class="form-control font-default"/>
-                        <div class="invalid-feedback text-start">
-                            Foto ir obligāts!
-                        </div>
+                        <input id="ProfilePic" name="ProfilePic" type="file" accept="image/*" class="form-control font-default"/>
                     </div>
                 </div>
                 <div class="col-lg-4">

@@ -23,7 +23,7 @@ class Participant
 
     public function createUser(array $fields) {
         if ($this->_DB->insert('participants', $fields)) {
-            return true;
+            return TRUE;
         } else {
             die('Error creating user.');
         }

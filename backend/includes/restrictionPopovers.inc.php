@@ -10,4 +10,5 @@ $restrictionPopovers = array(
     "Phone" => "<strong>Telefona numurs</strong><br><br><strong>Garums:</strong> 8 simboli<br><strong>Rakstzīmes:</strong> cipari",
     "Email" => "<strong>E-pasta adrese</strong>",
     "Password" => "<strong>Garums:</strong> 8-32 simboli<br><strong>Rakstzīmes:</strong> latīņu, latviešu alfabēta burti, cipari, speciālās rakstzīmes",
+    "CollectiveName" => "<strong>Garums:</strong> max 255 simboli<br><strong>Rakstzīmes:</strong> latīņu, latviešu alfabēta burti, cipari, speciālās rakstzīmes",
 );

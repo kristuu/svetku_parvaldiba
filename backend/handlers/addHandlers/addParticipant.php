@@ -1,7 +1,7 @@
 <?php
 
 require_once '../../core/init.php';
-require_once(ROOT_DIR . 'backend/includes/editPerson.inc.php');
+require_once(ROOT_DIR . 'backend/includes/editFields.inc.php');
 
 if (isset($_POST)) {
     // Acquire the data
@@ -49,6 +49,14 @@ if (isset($_POST)) {
                 $validate->isPassword($value);
         }
     }
+
+    if ($validate->getErrors()) {
+        $errorsString = urlencode(http_build_query($validate->getErrors()));
+        header("Location: " . ADMIN_DIR . "/public/editParticipant.php?id=" . $_POST["ParticipantID"] . "  &errors=" . $errorsString, true, 303);
+        exit;
+    }
+
+    $data[0]["Password"] = password_hash($_POST["Password"], PASSWORD_DEFAULT);
 
     // Update database query
     $participant = new Participant();

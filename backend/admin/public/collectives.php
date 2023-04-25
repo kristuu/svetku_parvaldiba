@@ -37,27 +37,27 @@ if (!$participant->getData()->Organiser) {
                 <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4 font-default">
                     <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
                         <thead class="font-title">
-                            <th>
-                                <th>ID</th>
-                                <th>Nosaukums</th>
-                                <th>Logo faila ceļš</th>
-                                <th>Reģions</th>
-                                <th>Kategorija</th>
-                            </th>
+                            <th>ID</th>
+                            <th>Nosaukums</th>
+                            <th>Logo</th>
+                            <th>Reģions</th>
+                            <th>Kategorija</th>
+                            <th>Darbības</th>
                         </thead>
                         <tbody>
                             <?php
-                                $x = 1;
                                 foreach($collective->getAllCollectives() as $collective) {
                                     echo "<tr>";
-                                    echo "<td>" . $x . "</td>";
                                     echo "<td>" . $collective->CollectiveID . "</td>";
                                     echo "<td>" . $collective->CollectiveName . "</td>";
-                                    echo "<td>" . $collective->LogoPath . "</td>";
+                                    echo "<td><img style=\"max-height: 50px;\" src=\"" . COLLECTIVELOGOS_DIR . '/' .  $collective->LogoPath . "\"></td>";
                                     echo "<td>" . $collective->RegionName . "</td>";
                                     echo "<td>" . $collective->CategoryName . "</td>";
+                                    echo "<td>";
+                                    echo "<button class='btn btn-warning me-3' onclick=\"location.href='editCollective.php?id=" . $collective->CollectiveID . "'\">Labot</button>";
+                                    echo "<a class='btn btn-danger' href='" . BACKEND_DIR . "/handlers/deleteHandlers/deleteCollective.php?id=" . $collective->CollectiveID . "'\">Dzēst</a>";
+                                    echo "</td>";
                                     echo "</tr>";
-                                    $x++;
                                 }
                             ?>
                         </tbody>

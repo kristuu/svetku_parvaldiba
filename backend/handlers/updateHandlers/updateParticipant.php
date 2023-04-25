@@ -1,7 +1,7 @@
 <?php
 
 require_once '../../core/init.php';
-require_once(ROOT_DIR . 'backend/includes/editPerson.inc.php');
+require_once(ROOT_DIR . 'backend/includes/editFields.inc.php');
 
 if (isset($_POST["submitEdit"])) {
     // Acquire the data

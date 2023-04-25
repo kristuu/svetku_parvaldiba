@@ -1,6 +1,6 @@
 <?php
 require_once '../../core/init.php';
-require_once(ROOT_DIR . 'backend/includes/editPerson.inc.php');
+require_once(ROOT_DIR . 'backend/includes/editFields.inc.php');
 require_once(ROOT_DIR . 'backend/includes/restrictionPopovers.inc.php');
 
 if (!isset($_SESSION["user_id"])) {
