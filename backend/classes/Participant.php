@@ -23,11 +23,16 @@ class Participant
 
     public function createUser(array $fields) {
         if ($this->_DB->insert('participants', $fields)) {
-            throw new \mysql_xdevapi\Exception('There was a problem creating an account.');
+            return true;
+        } else {
+            die('Error creating user.');
         }
     }
 
     public function findUser($user = null) {
+        if (!$user) {
+            $user = $_SESSION["user_id"];
+        }
         if ($user) {
             $field = 'ParticipantID';
             $data = $this->_DB->get('participants', array(array($field, '=', $user)));
@@ -69,6 +74,10 @@ class Participant
         }
 
         $this->_DB->update('participants', $data, array(array('ParticipantID', '=', $id)));
+    }
+
+    public function deleteUser(int $id) {
+        $this->_DB->delete('participants', array(array('ParticipantID', '=', $id)));
     }
 }
 

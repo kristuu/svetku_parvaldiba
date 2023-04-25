@@ -3,7 +3,7 @@
 require_once 'core/init.php';
 
 if (isset($_SESSION["user_id"])) {
-    header("Location: " . PUBLIC_DIR . "public/index.php");
+    header("Location: " . PUBLIC_DIR . "/index.php");
 }
 
 if (isset($_POST["submit"])) {
@@ -21,7 +21,7 @@ if (isset($_POST["submit"])) {
     $login->loginUser();
 
     // Going back to front page
-    header("Location: ../../public/index.php");
+    header("Location: " . PUBLIC_DIR . "/index.php");
 
 } else {
     echo "no post set";

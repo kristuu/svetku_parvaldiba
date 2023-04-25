@@ -63,7 +63,7 @@ if (isset($_GET['errors'])) {
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div id="PersonCode" class="input-group has-validation" data-bs-toggle="popover">
+                    <div id="PersonCodeDiv" class="input-group has-validation" data-bs-toggle="popover">
                         <span class="input-group-text font-title">PERSONAS KODS</span>
                         <input disabled type="text" tabindex="0" autocomplete="off" value="<?= $participant->getData()->PersonCode; ?>" class="form-control font-default"/>
                         </span>

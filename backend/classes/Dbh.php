@@ -107,16 +107,31 @@ class Dbh
 
     public function insert($table, $data = array())
     {
-        $columns = implode(', ', array_keys($data));
-        $values = "'" . implode("', '", array_values($data)) . "'";
+        $columns = array();
+        $values = array();
+        $bindValues = array();
+
+        foreach ($data as $array) {
+            $columnNames = array_keys($array);
+            $columnValues = array_values($array);
+
+            $columns[] = implode(', ', $columnNames);
+            $values[] = implode(', ', array_fill(0, count($columnNames), '?'));
+
+            $bindValues = array_merge($bindValues, $columnValues);
+        }
+
+        $columns = implode(', ', $columns);
+        $values = implode('), (', $values);
         $sql = "INSERT INTO {$table} ({$columns}) VALUES ({$values})";
 
-        if (!$this->query($sql)->_error) {
+        if (!$this->query($sql, $bindValues)->_error) {
             return $this;
         } else {
             return FALSE;
         }
     }
+
 
     public function update($table, $data = array(), $where = array()) {
         $set = array();

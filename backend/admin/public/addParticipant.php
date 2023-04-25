@@ -11,7 +11,6 @@ if (!isset($_SESSION["user_id"])) {
 require_once ROOT_DIR . 'backend/core/checkAgreement.php';
 
 $participant = new Participant();
-$participantData = $participant->findUser($_GET["id"]);
 
 // Check if the user is an administrator
 if (!$participant->findUser()->Organiser) {
@@ -32,14 +31,13 @@ if (isset($_GET['errors'])) {
 <main class="container">
     <?php include ROOT_DIR . 'public/blocks/logoContainer.php'; ?>
     <div class="my-3 p-3 rounded shadow-sm section-div">
-        <h6 class="border-bottom pb-2 mb-0 fw-bold">DALĪBNIEKA DATU PĀRVALDĪBAS PANELIS</h6>
+        <h6 class="border-bottom pb-2 mb-0 fw-bold">JAUNA DALĪBNIEKA PIEVIENOŠANAS PANELIS</h6>
         <div class="my-3 text-center">
-            <form class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/handlers/updateHandlers/updateParticipant.php" method="POST" novalidate>
+            <form class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/handlers/addHandlers/addParticipant.php" method="POST" novalidate>
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
                         <span class="input-group-text font-title">VĀRDS</span>
-                        <input hidden name="ParticipantID" value="<?= $participantData->ParticipantID; ?>"/>
-                        <input id="FName" name="FName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participantData->FName; ?>" class="form-control font-default" placeholder="Visi vārdi, ja ir vairāki" required/>
+                        <input id="FName" name="FName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="" class="form-control font-default" placeholder="Visi vārdi, ja ir vairāki" required/>
                         <div class="invalid-feedback text-start">
                             Pārliecinies, vai ievadīji vārdu pareizi! (piem., Jānis)
                         </div>
@@ -48,7 +46,7 @@ if (isset($_GET['errors'])) {
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
                         <span class="input-group-text font-title">UZVĀRDS</span>
-                        <input id="LName" name="LName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="<?= $participantData->LName; ?>" class="form-control font-default" placeholder="Visi uzvārdi, ja ir vairāki" required/>
+                        <input id="LName" name="LName" minlength="2" maxlength="30" data-bs-toggle="popover" type="text" autocomplete="off" value="" class="form-control font-default" placeholder="Visi uzvārdi, ja ir vairāki" required/>
                         <div class="invalid-feedback text-start  font-default">
                             Pārliecinies, vai ievadīji uzvārdu pareizi! (piem., Bērziņš)
                         </div>
@@ -57,14 +55,14 @@ if (isset($_GET['errors'])) {
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
                         <span class="input-group-text font-title">PERSONAS KODS</span>
-                        <input id="PersonCode" name="PersonCode" type="text" data-bs-toggle="popover" tabindex="0" autocomplete="off" value="<?= $participantData->PersonCode; ?>" class="form-control font-default"/>
+                        <input id="PersonCode" name="PersonCode" type="text" placeholder="11019145678" data-bs-toggle="popover" tabindex="0" autocomplete="off" value="" class="form-control font-default"/>
                         </span>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
                         <span class="input-group-text font-title">DZIMŠANAS DATI</span>
-                        <input id="BirthDate" name="BirthDate" type="date" value="<?= $participantData->BirthDate; ?>" class="form-control font-default" required/>
+                        <input id="BirthDate" name="BirthDate" type="date" value="" class="form-control font-default" required/>
                         <div class="invalid-feedback text-start font-default">
                             Neeksistējošs datums
                         </div>
@@ -73,7 +71,7 @@ if (isset($_GET['errors'])) {
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
                         <span class="input-group-text font-title">TĀLRUNIS</span>
-                        <input id="Phone" name="Phone" minlength="8" maxlength="8" data-bs-toggle="popover" type="tel" autocomplete="off" value="<?= $participantData->Phone; ?>" class="form-control font-default" required/>
+                        <input id="Phone" name="Phone" minlength="8" maxlength="8" placeholder="23456789" data-bs-toggle="popover" type="tel" autocomplete="off" value="" class="form-control font-default" required/>
                         <div class="invalid-feedback text-start font-default">
                             Pārliecinies, vai ievadīji telefona numuru pareizi! (piem., 21234567)
                         </div>
@@ -82,7 +80,7 @@ if (isset($_GET['errors'])) {
                 <div class="col-lg-4">
                     <div class="input-group has-validation">
                         <span class="input-group-text font-title">E-PASTS</span>
-                        <input id="Email" name="Email" minlength="5" maxlength="255" data-bs-toggle="popover" type="email" autocomplete="off" value="<?= $participantData->Email; ?>" class="form-control font-default" required/>
+                        <input id="Email" name="Email" minlength="5" maxlength="255" placeholder="janis@inbox.lv" data-bs-toggle="popover" type="email" autocomplete="off" value="" class="form-control font-default" required/>
                         <div class="invalid-feedback text-start font-default">
                             Pārliecinies, vai ievadīji e-pastu pareizi! (piem., janis.berzins@gmail.com)
                         </div>
@@ -91,15 +89,15 @@ if (isset($_GET['errors'])) {
                 <div class="col-lg-8">
                     <div class="input-group has-validation">
                         <span class="input-group-text font-title">PAROLE</span>
-                        <input id="Password" name="Password" minlength="8" maxlength="24" data-bs-toggle="popover" type="password" autocomplete="new-password" class="form-control font-default"/>
+                        <input id="Password" name="Password" minlength="8" maxlength="24" data-bs-toggle="popover" type="password" autocomplete="new-password" class="form-control font-default" required/>
                     </div>
                 </div>
                 <div class="col-lg-4 font-title">
-                    <input name="Organiser" type="checkbox" class="btn-check" id="organiser-check" autocomplete="off" <?= ($participantData->Organiser ? 'checked' : ''); ?>>
+                    <input name="Organiser" type="checkbox" class="btn-check" id="organiser-check" autocomplete="off">
                     <label class="btn btn-outline-danger w-100" for="organiser-check">ORGANIZATORS</label>
                 </div>
                 <div class="col-lg-12">
-                    <button type="submit" name="submitEdit" class="btn btn-outline-success w-100 font-title">SAGLABĀT</button>
+                    <button type="submit" name="submitAdd" class="btn btn-outline-success w-100  font-title">SAGLABĀT</button>
                 </div>
                 <div class="col-lg-12 text-start">
                     <?php

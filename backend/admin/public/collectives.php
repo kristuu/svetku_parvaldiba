@@ -1,7 +1,5 @@
 <?php
 require_once '../../core/init.php';
-// include edit person variables
-require_once(ROOT_DIR . 'backend/includes/restrictionPopovers.inc.php');
 // include datatable scripts
 require_once(ROOT_DIR . 'backend/includes/dataTables.inc.php');
 
@@ -18,7 +16,7 @@ $collective = new Collective();
 
 // Check if the user is an administrator
 if (!$participant->getData()->Organiser) {
-    header("Location: ". PUBLIC_DIR ."/index.php");
+    header("Location: ". ADMIN_DIR ."/index.php");
 }
 ?>
 

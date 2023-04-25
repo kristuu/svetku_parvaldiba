@@ -4,5 +4,7 @@ $pageNames = array(
     'about_me.php' => 'PERSONĪGĀ INFORMĀCIJA',
     'agreement.php' => 'PIEKRIŠANA',
     'collectives.php' => 'KOLEKTĪVI',
-    'editParticipant.php' => 'DALĪBNIEKS'
+    'participants.php' => 'DALĪBNIEKI',
+    'editParticipant.php' => 'DALĪBNIEKA DATU REDIĢĒŠANA',
+    'addParticipant.php' => 'DALĪBNIEKA PIEVIENOŠANA',
 );

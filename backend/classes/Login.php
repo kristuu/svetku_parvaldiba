@@ -16,17 +16,17 @@ class Login
         $checkPassword = password_verify($password, $passwordHashed);
 
         if (is_null($passwordHashed)) {
-            header("Location: ../../public/login.php?error=usernotfound");
+            header("Location: /svetku_parvaldiba/public/login.php?error=usernotfound");
             exit();
         }
         if (!$checkPassword) {
-            header("Location: ../../public/login.php?error=wrongpassword");
+            header("Location: /svetku_parvaldiba/public/login.php?error=wrongpassword");
             exit();
         } else {
             $this->_DB->get('participants', array(array('Email', '=', $email), array('Password', '=', $passwordHashed)));
 
             if ($this->_DB->getCount() === 0) {
-                header("Location: ../../public/login.php?error=usernotfound");
+                header("Location: /svetku_parvaldiba/public/login.php?error=usernotfound");
                 exit();
             }
 

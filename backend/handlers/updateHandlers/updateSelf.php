@@ -43,7 +43,6 @@ if (isset($_POST["submitSelfEdit"])) {
                 $validate->isLength($fields[$key], $value, 5, 255);
                 $validate->hasNoNumbers($fields[$key], $value);
                 break;
-            default:
         }
     }
 
@@ -73,7 +72,7 @@ if (isset($_POST["submitSelfEdit"])) {
         $target_dir = ROOT_DIR . "resources/img/participantPics/";
         $file_name = basename($_FILES["ProfilePic"]["name"]);
         $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-        $unique_name = time() . uniqid(rand());
+        $unique_name = updateSelf . phptime() . uniqid(rand());
         $target_file = $target_dir . $unique_name . '.' . $file_type;
 
         if (in_array($file_type, array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg', 'tiff'))) {
@@ -117,16 +116,12 @@ if (isset($_POST["submitSelfEdit"])) {
             // Create a new filename for the converted JPEG image
             $newFilename = 'new_filename.jpg'; // Replace 'new_filename' with the desired name for the converted image
 
-            // Save the converted image as JPEG
-            imagejpeg($newImage, $newFilename, 100); // You can adjust the quality (0-100) as needed
-
-            // Free up memory by destroying the image resources
-            imagedestroy($uploadedImage);
-            imagedestroy($newImage);
-
-            if (move_uploaded_file(imagejpeg($_FILES["ProfilePic"]["tmp_name"]), $target_file)) {
+            if (imagejpeg($newImage, $target_file)) {
                 $profilePic = $unique_name . '.' . $file_type;
                 $data[0]["ProfilePic"] = $profilePic;
+                // Free up memory by destroying the image resources
+                imagedestroy($uploadedImage);
+                imagedestroy($newImage);
             } else {
                 die('Profile picture upload failed');
             }

@@ -7,7 +7,9 @@ $fields = array(
     "PersonCode" => "Personas kods",
     "BirthDate" => "Dzimšanas datums",
     "Phone" => "Telefona numurs",
-    "Email" => "E-pasta adrese"
+    "Email" => "E-pasta adrese",
+    "Password" => "Parole",
+    "Organiser" => "Organizators"
 );
 
 if(isset($_GET["error"])) {
