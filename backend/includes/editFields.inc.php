@@ -13,4 +13,5 @@ $fields = array(
     "CollectiveName" => "Kolektīva nosaukums",
     "CategoryName" => "Kategorijas nosaukums",
     "RegionName" => "Reģiona nosaukums",
+    "TypeName" => "Tipa nosaukums",
 );

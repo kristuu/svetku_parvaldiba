@@ -49,4 +49,13 @@ class Categorytypes
         }
     }
 
+    public function deleteType(int $id) {
+        if ($id) {
+            $this->_DB->delete('categorytypes', array(array('TypeID', '=', $id)));
+            return TRUE;
+        } else {
+            die('Error deleting type.');
+        }
+    }
+
 }

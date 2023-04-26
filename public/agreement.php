@@ -12,28 +12,15 @@ $dataAgreement = $participant->getData()->DataAgreement;
 
 <!DOCTYPE html>
 <html lang="lv">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piekrišana | XXVII Vispārējie latviešu Dziesmu un XVII Deju svētki</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../resources/css/universal.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-</head>
+<?php include ROOT_DIR . 'backend/includes/head.inc.php'; ?>
 <body>
 <?php include ROOT_DIR . 'public/blocks/header.php' ?>
 <main class="container">
-    <div class="w-100 bg-white rounded mt-lg-4 mt-2 d-flex flex-column align-items-center text-center">
-        <div class="div-logo m-auto">
-            <img class="logo-gars img-fluid" src="../resources/img/logo-rinda.svg"/>
-            <img class="logo-iss img-fluid" src="../resources/img/logo-kompakts.svg"/>
-        </div>
-        <div class="my-3 w-75 text-start">
-            <h1 class="text-center">Drošas un patīkamas svētku norises nodrošināšanas nolūkos mums ir nepieciešama Tava piekrišana!</h1>
-            <form class="needs-validation row mt-5 mb-4 gy-4 ms-auto me-auto" method="POST" action="<?=BACKEND_DIR?>/includes/updateAgreement.inc.php" novalidate>
+    <?php include ROOT_DIR . 'public/blocks/logoContainer.php'; ?>
+    <div class="my-3 p-3 rounded shadow-sm section-div">
+        <h6 class="border-bottom pb-2 mb-0 fw-bold">Drošas un patīkamas svētku norises nodrošināšanas nolūkos mums ir nepieciešama Tava piekrišana:</h6>
+        <div class="w-75 mx-auto">
+            <form class="needs-validation row mt-3 mb-4 gy-4 ms-auto me-auto" method="POST" action="<?=BACKEND_DIR?>/handlers/updateHandlers/updateAgreement.php" novalidate>
                 <div class="form-check">
                     <h3 class="mb-3">Apliecinājums par kārtības noteikumiem</h3>
                     <input type="checkbox" class="form-check-input" name="rulesAgreement" id="rulesAgreement" <?=$rulesAgreement ? 'checked' : '';?> required>

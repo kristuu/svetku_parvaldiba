@@ -23,6 +23,23 @@ $pCollectiveList = $participCollectives->getParticipantsCollectives($participant
 <!DOCTYPE html>
 <html lang="lv">
 <?php include ROOT_DIR . '/backend/includes/head.inc.php'; ?>
+<head>
+    <style>
+        .card {
+            height: 100%;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .btn {
+            align-self: end;
+            margin-top: auto !important;
+        }
+    </style>
+</head>
 <body>
 <?php include ROOT_DIR . 'public/blocks/header.php'; ?>
 <main class="container">
@@ -54,6 +71,15 @@ $pCollectiveList = $participCollectives->getParticipantsCollectives($participant
                         <h5 class="card-title">Kategorijas</h5>
                         <p class="card-text">Kolektīviem atbilstošās kategorijas</p>
                         <a href="categories.php" class="btn btn-outline-success font-title">PĀRVALDĪT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tipi</h5>
+                        <p class="card-text">Kategorijas iedalošie tipi</p>
+                        <a href="categorytypes.php" class="btn btn-outline-success font-title">PĀRVALDĪT</a>
                     </div>
                 </div>
             </div>

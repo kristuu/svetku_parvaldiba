@@ -16,7 +16,7 @@ $pCollectiveList = $participCollectives->getParticipantsCollectives($participant
 
 <!DOCTYPE html>
 <html lang="lv">
-<?php include ROOT_DIR . '/backend/includes/head.inc.php'; ?>
+<?php include ROOT_DIR . 'backend/includes/head.inc.php'; ?>
 <body>
 <?php include ROOT_DIR . 'public/blocks/header.php'; ?>
 <main class="container">

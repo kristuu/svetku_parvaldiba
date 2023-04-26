@@ -83,11 +83,27 @@ class ParticipCollectives
         $this->_DB->update('participcollectives', array(array('MainCollective' => 1)), array(array('ParticipantID', '=', $userID), array('CollectiveID', '=', $mainCollectiveID)));
     }
 
+    public function createParticipCollective(array $fields) {
+        if ($this->_DB->insert('participcollectives', $fields)) {
+            return TRUE;
+        } else {
+            die('Error creating participCollective connection.');
+        }
+    }
+
     public function updateParticipCollective(array $fields, int $id) {
         if ($id) {
             $this->_DB->update('participcollectives', $fields, array(array('ID', '=', $id)));
         } else {
-            die('Error updating participCollective');
+            die('Error updating participCollective connection.');
+        }
+    }
+
+    public function deleteParticipCollective(int $id) {
+        if ($id) {
+            $this->_DB->delete('participcollectives', array(array('ID', '=', $id)));
+        } else {
+            die('Error deleting participCollective connection.');
         }
     }
 

@@ -32,7 +32,7 @@ if (isset($_GET['errors'])) {
     <div class="my-3 p-3 rounded shadow-sm section-div">
         <h6 class="border-bottom pb-2 mb-0 fw-bold">DALĪBNIEKA SAISTĪJUMA AR KOLEKTĪVU PIEVIENOŠANAS PANELIS</h6>
         <div class="my-3 text-center">
-            <form class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/handlers/updateHandlers/addParticipCollective.php" method="POST" novalidate>
+            <form class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/handlers/addHandlers/addParticipCollective.php" method="POST" novalidate>
                 <div class="col-lg-6">
                     <div class="input-group has-validation">
                         <label class="input-group-text font-title" for="ParticipantID">DALĪBNIEKS</label>
@@ -40,7 +40,7 @@ if (isset($_GET['errors'])) {
                             <?php
                             $participants = $participant->getAllParticipants();
                             foreach ($participants as $object) {
-                                echo "<option class='font-default' value='$object->ParticipantID'>$object->FName $object->LName</option>";
+                                echo "<option class='font-default' value='$object->ParticipantID'>$object->FName $object->LName - $object->PersonCode</option>";
                             }
                             ?>
                         </select>
@@ -61,11 +61,11 @@ if (isset($_GET['errors'])) {
                     </div>
                 </div>
                 <div class="col-lg-6 font-title">
-                    <input name="Manager" type="checkbox" <?=($pcData->Manager) ? 'checked' : ''?> class="btn-check" id="manager-check" autocomplete="off">
+                    <input name="Manager" type="checkbox" class="btn-check" id="manager-check" autocomplete="off">
                     <label class="btn btn-outline-danger w-100" for="manager-check">IR KOLEKTĪVA VADĪTĀJS</label>
                 </div>
                 <div class="col-lg-6">
-                    <button type="submit" name="submitEdit" class="btn btn-outline-success w-100 font-title">SAGLABĀT</button>
+                    <button type="submit" name="submitAdd" class="btn btn-outline-success w-100 font-title">SAGLABĀT</button>
                 </div>
                 <div class="col-lg-12 text-start">
                     <?php
