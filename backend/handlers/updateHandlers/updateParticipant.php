@@ -25,8 +25,10 @@ if (isset($_POST["submitEdit"])) {
     foreach ($data[0] as $key => $value) {
         // General validation
 
-        $validate->isEmpty($fields[$key], $value);
-        $data[0][$key] = $validate->cleanInput($value);
+        if ($key !== "Organiser") {
+            $validate->isEmpty($fields[$key], $value);
+            $data[0][$key] = $validate->cleanInput($value);
+        }
 
         // fields that are immune to special character check
         $immuneFields = array("Email", "Password", "Organiser");

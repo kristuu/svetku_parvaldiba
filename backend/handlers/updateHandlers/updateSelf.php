@@ -126,18 +126,15 @@ if (isset($_POST["submitSelfEdit"])) {
                 die('Profile picture upload failed');
             }
         }
-
-        // Update database query
-        $participant = new Participant();
-        $participCollectives = new ParticipCollectives();
-        $participant->update($data);
-        $participCollectives->updateParticipantsMainCollective($collectiveID);
-
-
-        // Going back to front page
-        header("Location: " . PUBLIC_DIR . "/index.php");
-
-    } else {
-        header("Location: " . PUBLIC_DIR . "/about_me.php");
     }
+
+    // Update database query
+    $participant = new Participant();
+    $participCollectives = new ParticipCollectives();
+    $participant->update($data);
+    $participCollectives->updateParticipantsMainCollective($collectiveID);
+
+
+    // Going back to front page
+    header("Location: " . PUBLIC_DIR . "/index.php");
 }

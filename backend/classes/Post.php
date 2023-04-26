@@ -23,7 +23,7 @@ class Post
     }
 
     public function getGlobalPosts() {
-        $data = $this->_DB->get('posts', array(array('CollectiveID', '=', NULL)));
+        $data = $this->_DB->get('posts', array(array('CollectiveID', '=', 0)));
         if ($data->getCount()) {
             $this->_data = $data->getResults();
             return $this->_data;
@@ -33,7 +33,7 @@ class Post
     }
 
     public function getAllPosts() {
-        $data = $this->_DB->get('posts');
+        $data = $this->_DB->get('posts', array(), array(array('INNER', 'collectives', 'collectives.CollectiveID', 'posts.CollectiveID')));
         if ($data->getCount()) {
             $this->_data = $data->getResults();
             return $this->_data;

@@ -29,7 +29,7 @@ if (isset($_GET['errors'])) {
     <div class="my-3 p-3 rounded shadow-sm section-div">
         <h6 class="border-bottom pb-2 mb-0 fw-bold">PROFILA DATU PĀRVALDĪBAS PANELIS</h6>
         <div class="my-3 text-center">
-            <form id="editForm" enctype="multipart/form-data" class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/updateHandlers/updateSelf.php" method="POST" novalidate>
+            <form id="editForm" enctype="multipart/form-data" class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/handlers/updateHandlers/updateSelf.php" method="POST" novalidate>
                 <div class="col-12">
                     <div id="ProfilePhotoContainer" class="w-100">
                         <img <?= is_null($participant->getData()->ProfilePic) ? 'hidden' : ''; ?> id="ProfilePhoto" style="max-height: 200px;" src="<?= PARTICIPIMG_DIR . '/' . $participant->getData()->ProfilePic ?>">
