@@ -49,4 +49,13 @@ class Collective
         }
     }
 
+    public function deleteCollective(int $id) {
+        if ($id) {
+            $this->_DB->delete('collectives', array(array('CollectiveID', '=', $id)));
+            return TRUE;
+        } else {
+            die('Error deleting collective.');
+        }
+    }
+
 }

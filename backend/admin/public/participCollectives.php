@@ -31,8 +31,9 @@ if (!$participant->getData()->Organiser) {
     <?php include ROOT_DIR . 'public/blocks/logoContainer.php'; ?>
     <div class="my-3 p-3 rounded shadow-sm section-div">
         <h6 class="border-bottom pb-2 mb-0 fw-bold">DALĪBNIEKU SAISTĪJUMA AR KOLEKTĪVIEM PĀRVALDĪBAS PANELIS</h6>
-        <div class="my-3 text-center">
+        <div class="my-3">
             <div class="card-body">
+                <button class="btn btn-outline-dark w-100 font-title mb-3" href="#" onclick="location.href='addParticipCollective.php'">PIEVIENOT DALĪBNIEKA SAISTĪJUMU AR KOLEKTĪVU</button>
                 <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4 font-default">
                     <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
                         <thead class="font-title">
@@ -54,7 +55,7 @@ if (!$participant->getData()->Organiser) {
                             echo "<td>" . $object->Manager . "</td>";
                             echo "<td>";
                             echo "<button class='btn btn-warning me-3' onclick=\"location.href='editParticipCollective.php?id=" . $object->ID . "'\">Labot</button>";
-                            echo "<a class='btn btn-danger' href='" . BACKEND_DIR . "/handlers/deleteHandlers/deleteCollective.php?id=" . $object->ID . "'\">Dzēst</a>";
+                            echo "<a class='btn btn-danger' href='" . BACKEND_DIR . "/handlers/deleteHandlers/deleteParticipCollective.php?id=" . $object->ID . "'\">Dzēst</a>";
                             echo "</td>";
                             echo "</tr>";
                         }

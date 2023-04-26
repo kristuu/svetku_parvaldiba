@@ -34,6 +34,7 @@ if (!$participant->getData()->Organiser) {
         <h6 class="border-bottom pb-2 mb-0 fw-bold">KOLEKTĪVA PĀRVALDĪBAS PANELIS</h6>
         <div class="my-3 text-center">
             <div class="card-body">
+                <button class="btn btn-outline-dark w-100 font-title mb-3" href="#" onclick="location.href='addCollective.php'">PIEVIENOT KOLEKTĪVU</button>
                 <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4 font-default">
                     <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
                         <thead class="font-title">

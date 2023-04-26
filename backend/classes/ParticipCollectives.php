@@ -52,6 +52,19 @@ class ParticipCollectives
         }
     }
 
+    public function getParticipCollective(int $id) {
+        if ($id) {
+            $field = 'ID';
+            $data = $this->_DB->get('participcollectives', array(array($field, '=', $id)), array(array("INNER", "collectives", "participcollectives.CollectiveID", "collectives.CollectiveID"), array("INNER", "participants", "participcollectives.ParticipantID", "participants.ParticipantID")));
+            if ($data->getCount()) {
+                $this->_data = $data->getResults();
+                return $this->_data;
+            } else {
+                die('ParticipCollective retrieve failed.');
+            }
+        }
+    }
+
     public function getAllParticipantsCollectives() {
         $data = $this->_DB->get('participcollectives', array(), array(array("INNER", "collectives", "participcollectives.CollectiveID", "collectives.CollectiveID"), array("INNER", "participants", "participcollectives.ParticipantID", "participants.ParticipantID")));
         if ($data->getCount()) {
@@ -68,6 +81,14 @@ class ParticipCollectives
         }
         $this->_DB->update('participcollectives', array(array('MainCollective' => 0)), array(array('ParticipantID', '=', $userID)));
         $this->_DB->update('participcollectives', array(array('MainCollective' => 1)), array(array('ParticipantID', '=', $userID), array('CollectiveID', '=', $mainCollectiveID)));
+    }
+
+    public function updateParticipCollective(array $fields, int $id) {
+        if ($id) {
+            $this->_DB->update('participcollectives', $fields, array(array('ID', '=', $id)));
+        } else {
+            die('Error updating participCollective');
+        }
     }
 
     public function getData() {

@@ -28,7 +28,7 @@ $pCollectiveList = $participCollectives->getParticipantsCollectives($participant
             $cParticipants = $participCollectives->getCollectiveParticipants($collective->CollectiveID);
         ?>
         <div class="d-flex text-body-secondary pt-3">
-            <img class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" role="img"/>
+            <img class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" src="<?= COLLECTIVELOGOS_DIR . '/' . $collective->LogoPath; ?>" role="img"/>
                 <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
                     <div class="d-flex justify-content-between">
                         <strong class="text-gray-dark"><?=$collective->CollectiveName . ($collective->MainCollective ? ' | GALVENAIS' : ''); ?></strong>

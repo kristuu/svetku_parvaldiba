@@ -15,7 +15,7 @@ class LoginContr extends Login
     public function loginUser()
     {
         $validate = new Validate();
-        if ($validate->isEmpty($this->email) && $validate->isEmpty($this->password)) {
+        if ($validate->isEmpty('E-pasts', $this->email) && $validate->isEmpty('Parole', $this->password)) {
             header("Location: ../../public/login.php?error=emptyinput");
             exit();
         }

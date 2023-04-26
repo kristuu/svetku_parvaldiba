@@ -3,7 +3,7 @@
 require_once '../../core/init.php';
 require_once(ROOT_DIR . 'backend/includes/editFields.inc.php');
 
-if (isset($_POST["submitEdit"])) {
+if (isset($_POST)) {
     // Acquire the data
     $data = array(array(
         'CollectiveName' => $_POST["CollectiveName"],
@@ -38,13 +38,6 @@ if (isset($_POST["submitEdit"])) {
     $collectiveLogo = '';
 
     if (isset($_FILES["LogoPath"]) && $_FILES["LogoPath"]["error"] == 0) {
-        $collectiveClass = new Collective();
-        $collective = $collectiveClass->findCollective($collectiveID);
-
-        if (!empty($collective->LogoPath)) {
-            $oldLogo = ROOT_DIR . "resources/img/collectiveLogos/" . $collective->LogoPath;
-            unlink($oldLogo);
-        }
 
         $target_dir = ROOT_DIR . "resources/img/collectiveLogos/";
         $file_name = basename($_FILES["LogoPath"]["name"]);
@@ -107,7 +100,7 @@ if (isset($_POST["submitEdit"])) {
 
     // Update database query
     $collectiveClass = new Collective();
-    $collective = $collectiveClass->updateCollective($data, $collectiveID);
+    $collective = $collectiveClass->createCollective($data);
 
 
     // Going back to front page
