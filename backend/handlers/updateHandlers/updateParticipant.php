@@ -13,6 +13,7 @@ if (isset($_POST["submitEdit"])) {
         'Phone' => $_POST["Phone"],
         'Email' => $_POST["Email"],
         'Password' => $_POST["Password"],
+        'Choreograph' => isset($_POST["Choreograph"]),
         'Organiser' => isset($_POST["Organiser"])
     ));
 
@@ -25,13 +26,13 @@ if (isset($_POST["submitEdit"])) {
     foreach ($data[0] as $key => $value) {
         // General validation
 
-        if ($key !== "Organiser") {
+        if ($key !== "Organiser" && $key !== "Choreograph") {
             $validate->isEmpty($fields[$key], $value);
             $data[0][$key] = $validate->cleanInput($value);
         }
 
         // fields that are immune to special character check
-        $immuneFields = array("Email", "Password", "Organiser");
+        $immuneFields = array("Email", "Password", "Choreograph", "Organiser");
 
         // Check if any other field contains special characters, return the user
         if (!in_array($key, $immuneFields)) {

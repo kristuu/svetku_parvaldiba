@@ -14,4 +14,10 @@ $fields = array(
     "CategoryName" => "Kategorijas nosaukums",
     "RegionName" => "Reģiona nosaukums",
     "TypeName" => "Tipa nosaukums",
+    "DanceName" => "Dejas nosaukums",
+    "RehearsalDesc" => "Mēģinājuma apraksts",
+    "StartTime" => "Mēģinājuma sākums",
+    "EndTime" => "Mēģinājuma beigas",
+    "DanceID" => "Dejas ID",
+    "ChoreographID" => "Horeogrāfa ID",
 );

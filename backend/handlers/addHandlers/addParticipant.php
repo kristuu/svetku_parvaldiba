@@ -13,6 +13,7 @@ if (isset($_POST)) {
         'Phone' => $_POST["Phone"],
         'Email' => $_POST["Email"],
         'Password' => $_POST["Password"],
+        'Choreograph' => isset($_POST["Choreograph"]),
         'Organiser' => isset($_POST["Organiser"])
     ));
 
@@ -25,7 +26,7 @@ if (isset($_POST)) {
         $data[0][$key] = $validate->cleanInput($value);
 
         // fields that are immune to special character check
-        $immuneFields = array("Email", "Password", "Organiser");
+        $immuneFields = array("Email", "Password", "Choreograph", "Organiser");
 
         // Check if any other field contains special characters, return the user
         if (!in_array($key, $immuneFields)) {
@@ -52,7 +53,7 @@ if (isset($_POST)) {
 
     if ($validate->getErrors()) {
         $errorsString = urlencode(http_build_query($validate->getErrors()));
-        header("Location: " . ADMIN_DIR . "/public/editParticipant.php?id=" . $_POST["ParticipantID"] . "  &errors=" . $errorsString, true, 303);
+        header("Location: " . ADMIN_DIR . "/public/addParticipant.php?errors=" . $errorsString, true, 303);
         exit;
     }
 

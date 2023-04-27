@@ -101,6 +101,33 @@ $pCollectiveList = $participCollectives->getParticipantsCollectives($participant
                     </div>
                 </div>
             </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Dejas</h5>
+                        <p class="card-text">Eksistējošās & mēģinājumiem piesaistāmās dejas</p>
+                        <a href="dances.php" class="btn btn-outline-success font-title">PĀRVALDĪT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Mēģinājumi</h5>
+                        <p class="card-text">Eksistējošie mēģinājumi</p>
+                        <a href="rehearsals.php" class="btn btn-outline-success font-title">PĀRVALDĪT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Kolektīvu kategorijas - mēģinājumi</h5>
+                        <p class="card-text">Kolektīvu (pēc to kategorijām) saistījums ar mēģinājumiem</p>
+                        <a href="collectivesRehearsals.php" class="btn btn-outline-success font-title">PĀRVALDĪT</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>

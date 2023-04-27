@@ -54,6 +54,15 @@ class Participant
         return 'No participants in table.';
     }
 
+    public function getAllChoreographs() {
+        $data = $this->_DB->get('participants', array(array('Choreograph', '=', 1)));
+        if ($data->getCount()) {
+            $this->_data = $data->getResults();
+            return $this->_data;
+        }
+        return 'No choreographs in table.';
+    }
+
     public function exists() {
         return !empty($this->_data);
     }

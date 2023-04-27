@@ -47,6 +47,7 @@ if (!$participant->findUser()->Organiser) {
                                 <th>E-pasts</th>
                                 <th>Parole</th>
                                 <th>Dzimšanas dati</th>
+                                <th>Horeogrāfs</th>
                                 <th>Organizators</th>
                                 <th>Darbības</th>
                             </th>
@@ -66,6 +67,7 @@ if (!$participant->findUser()->Organiser) {
                             echo "<td>" . $participantx->Email . "</td>";
                             echo "<td>" . $participantx->Password . "</td>";
                             echo "<td>" . $participantx->BirthDate . "</td>";
+                            echo "<td>" . $participantx->Choreograph . "</td>";
                             echo "<td>" . $participantx->Organiser . "</td>";
                             echo "<td>";
                             echo "<button class='btn btn-warning me-3' onclick=\"location.href='editParticipant.php?id=" . $participantx->ParticipantID . "'\">Labot</button>";

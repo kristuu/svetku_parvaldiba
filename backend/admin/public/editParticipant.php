@@ -88,11 +88,15 @@ if (isset($_GET['errors'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-4">
                     <div class="input-group has-validation">
                         <span class="input-group-text font-title">PAROLE</span>
                         <input id="Password" name="Password" minlength="8" maxlength="24" data-bs-toggle="popover" type="password" autocomplete="new-password" class="form-control font-default"/>
                     </div>
+                </div>
+                <div class="col-lg-4 font-title">
+                    <input name="Choreograph" type="checkbox" class="btn-check" id="choreograph-check" autocomplete="off" <?= ($participantData->Choreograph ? 'checked' : ''); ?>>
+                    <label class="btn btn-outline-warning w-100" for="choreograph-check">HOREOGRĀFS</label>
                 </div>
                 <div class="col-lg-4 font-title">
                     <input name="Organiser" type="checkbox" class="btn-check" id="organiser-check" autocomplete="off" <?= ($participantData->Organiser ? 'checked' : ''); ?>>
