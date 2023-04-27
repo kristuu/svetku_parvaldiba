@@ -3,17 +3,17 @@
 class Rehearsals
 {
     private Dbh $_DB;
-    private $_data;
+    private array $_data;
 
     public function __construct($user = null)
     {
         $this->_DB = Dbh::getInstance();
     }
 
-    public function findRehearsal($danceID = null) {
-        if($danceID) {
+    public function findRehearsal($id = null) {
+        if($id) {
             $field = 'RehearsalID';
-            $data = $this->_DB->get('rehearsals', array(array($field, '=', $danceID)), array(array('LEFT', 'dances', 'rehearsals.DanceID', 'dances.DanceID'), array('LEFT', 'participants', 'rehearsals.ChoreographID', 'participants.ParticipantID')));
+            $data = $this->_DB->get('rehearsals', array(array($field, '=', $id)), array(array('LEFT', 'dances', 'rehearsals.DanceID', 'dances.DanceID'), array('LEFT', 'participants', 'rehearsals.ChoreographID', 'participants.ParticipantID')));
             if ($data->getCount()) {
                 $this->_data = $data->getResults()[0];
                 return $this->_data;

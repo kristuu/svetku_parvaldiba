@@ -2,7 +2,7 @@
 
 class Validate
 {
-    private $errors = [];
+    private array $errors = [];
 
 
     // Check if the provided variable's value is empty
