@@ -68,8 +68,8 @@ $colrehClass = new CollectivesRehearsals();
                     $endTime = new DateTime($rehearsal->EndTime);
                     if ($rehearsal->EndTime >= date('Y-m-d H:i:s')):?>
                     <div class="col-md-3">
-                        <div class="card bg-linu-gaisais h-100">
-                            <div class="card-body">
+                        <div class="card h-100">
+                            <div class="card-body bg-smilsu-brunais text-linu-gaisais">
                                 <?php if(!empty($rehearsal->RehearsalDesc)): ?>
                                     <h6 class="card-title fw-bold"><?=($rehearsal->RehearsalDesc ?? '')?></h6>
                                 <?php endif; ?>
@@ -78,17 +78,17 @@ $colrehClass = new CollectivesRehearsals();
                                 <?php endif; ?>
                             </div>
                             <ul class="list-group list-group-flush"></ul>
-                            <div class="card-body">
+                            <div class="card-body bg-linu-gaisais text-oglu-melnais">
                                 <h6 class="card-title">SĀKUMS</h6>
                                 <p class="card-text"><?=$startTime->format('d. M » G.i')?></p>
                             </div>
-                            <ul class="list-group list-group-flush"></ul>
-                            <div class="card-body">
+
+                            <div class="card-body bg-linu-gaisais text-oglu-melnais">
                                 <h6 class="card-title">BEIGAS</h6>
                                 <p class="card-text"><?=$endTime->format('d. M » G.i')?></p>
                             </div>
                             <ul class="list-group list-group-flush"></ul>
-                            <div class="card-body">
+                            <div class="card-body bg-dzervenu-sartais text-linu-gaisais">
                                 <h6 class="card-title fw-bold">HOREOGRĀFS</h6>
                                 <p class="card-text"><?=$rehearsal->FName . ' ' . $rehearsal->LName?></p>
                             </div>
