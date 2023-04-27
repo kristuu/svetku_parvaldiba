@@ -10,8 +10,10 @@ require_once ROOT_DIR . 'backend/core/checkAgreement.php';
 
 $participant = new Participant();
 $participantID = $participant->getData()->ParticipantID;
+$collectiveClass = new Collective();
 $participCollectives = new ParticipCollectives();
 $pCollectiveList = $participCollectives->getParticipantsCollectives($participantID);
+$colrehClass = new CollectivesRehearsals();
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +47,61 @@ $pCollectiveList = $participCollectives->getParticipantsCollectives($participant
                 </div>
         </div>
         <?php endforeach; ?>
+    </div>
+    <div class="my-3 p-3 rounded shadow-sm section-div">
+        <h6 class="border-bottom pb-2 mb-0 fw-bold">Mēģinājumi:</h6>
+        <?php
+        foreach($pCollectiveList as $collective):
+            $cRehearsals = $collectiveClass->getCollectivesRehearsals($collective->CollectiveID);
+            // sort rehearsals by start time in ascending order
+            if(!is_string($cRehearsals)) {
+                usort($cRehearsals, function ($a, $b) {
+                    return strtotime($a->StartTime) - strtotime($b->StartTime);
+                });
+            }?>
+            <h6 class="border-bottom pb-2 mt-3 mb-2 fw-normal"><?=$collective->CollectiveName . ' (' . $collective->CategoryName . ')'?></h6>
+            <div class="row g-3">
+            <?php
+            if(!is_string($cRehearsals)) {
+                foreach($cRehearsals as $rehearsal):
+                    $startTime = new DateTime($rehearsal->StartTime);
+                    $endTime = new DateTime($rehearsal->EndTime);
+                    if ($rehearsal->EndTime >= date('Y-m-d H:i:s')):?>
+                    <div class="col-md-3">
+                        <div class="card bg-linu-gaisais h-100">
+                            <div class="card-body">
+                                <?php if(!empty($rehearsal->RehearsalDesc)): ?>
+                                    <h6 class="card-title fw-bold"><?=($rehearsal->RehearsalDesc ?? '')?></h6>
+                                <?php endif; ?>
+                                <?php if(!empty($rehearsal->DanceName)): ?>
+                                    <h6 class="card-title fw-bold"><?=($rehearsal->DanceName ?? '')?></h6>
+                                <?php endif; ?>
+                            </div>
+                            <ul class="list-group list-group-flush"></ul>
+                            <div class="card-body">
+                                <h6 class="card-title">SĀKUMS</h6>
+                                <p class="card-text"><?=$startTime->format('d. M » G.i')?></p>
+                            </div>
+                            <ul class="list-group list-group-flush"></ul>
+                            <div class="card-body">
+                                <h6 class="card-title">BEIGAS</h6>
+                                <p class="card-text"><?=$endTime->format('d. M » G.i')?></p>
+                            </div>
+                            <ul class="list-group list-group-flush"></ul>
+                            <div class="card-body">
+                                <h6 class="card-title fw-bold">HOREOGRĀFS</h6>
+                                <p class="card-text"><?=$rehearsal->FName . ' ' . $rehearsal->LName?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif;
+                endforeach;
+            } else {
+                echo '<div class="col-md-12"><p class="text-center">Kolektīvam nav ieplānotu mēģinājumu</p></div>';
+            } ?>
+            </div>
+        <?php
+        endforeach; ?>
     </div>
 </main>
 </body>

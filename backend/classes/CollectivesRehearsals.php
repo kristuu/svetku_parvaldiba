@@ -23,7 +23,7 @@ class CollectivesRehearsals
     }
 
     public function getAllConnections() {
-        $data = $this->_DB->get('collectivesrehearsals', array(), array(array('INNER', 'rehearsals', 'rehearsals.RehearsalID', 'collectivesrehearsals.RehearsalID'), array('INNER', 'categories', 'collectivesrehearsals.CategoryID', 'categories.CategoryID')));
+        $data = $this->_DB->get('collectivesrehearsals', array(), array(array('INNER', 'rehearsals', 'rehearsals.RehearsalID', 'collectivesrehearsals.RehearsalID'), array('INNER', 'categories', 'collectivesrehearsals.CategoryID', 'categories.CategoryID'), array('LEFT', 'dances', 'dances.DanceID', 'rehearsals.DanceID')));
         if ($data->getCount()) {
             $this->_data = $data->getResults();
             return $this->_data;
@@ -42,7 +42,7 @@ class CollectivesRehearsals
 
     public function updateConnection(array $data, int $id) {
         if ($id) {
-            $this->_DB->update('rehearsals', $data, array(array('colrehID', '=', $id)));
+            $this->_DB->update('collectivesrehearsals', $data, array(array('colrehID', '=', $id)));
             return TRUE;
         } else {
             die('Error updating collectivesrehearsal connection.');
@@ -51,7 +51,7 @@ class CollectivesRehearsals
 
     public function deleteConnection(int $id) {
         if ($id) {
-            $this->_DB->delete('rehearsals', array(array('colrehID', '=', $id)));
+            $this->_DB->delete('collectivesrehearsals', array(array('colrehID', '=', $id)));
             return TRUE;
         } else {
             die('Error deleting collectivesrehearsal connection.');

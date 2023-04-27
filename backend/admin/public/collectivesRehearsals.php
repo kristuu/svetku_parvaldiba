@@ -49,11 +49,11 @@ if (!$participant->findUser()->Organiser) {
                             foreach($allConnections as $object) {
                                 echo "<tr>";
                                 echo "<td>" . $object->colrehID . "</td>";
-                                echo "<td>" . $object->RehearsalID . ' - ' . $object->RehearsalDesc . ' || ' . $object->StartTime . ' - ' . $object->EndTime . "</td>";
+                                echo "<td>" . $object->RehearsalID . ' - ' . $object->RehearsalDesc . ' (' . $object->DanceName . ') ' . ' || ' . $object->StartTime . ' - ' . $object->EndTime . "</td>";
                                 echo "<td>" . $object->CategoryID . ' - ' . $object->CategoryName . "</td>";
                                 echo "<td>";
-                                echo "<button class='btn btn-warning me-3' onclick=\"location.href='editCollectivesRehearsal.php?id=" . $object->RehearsalID . "'\">Labot</button>";
-                                echo "<a class='btn btn-danger' href='" . BACKEND_DIR . "/handlers/deleteHandlers/deleteCollectivesRehearsal.php?id=" . $object->RehearsalID . "'\">Dzēst</a>";
+                                echo "<button class='btn btn-warning me-3' onclick=\"location.href='editCollectivesRehearsal.php?id=" . $object->colrehID . "'\">Labot</button>";
+                                echo "<a class='btn btn-danger' href='" . BACKEND_DIR . "/handlers/deleteHandlers/deleteCollectivesRehearsal.php?id=" . $object->colrehID . "'\">Dzēst</a>";
                                 echo "</td>";
                                 echo "</tr>";
                             }

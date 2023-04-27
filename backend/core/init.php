@@ -26,3 +26,5 @@ define('ADMIN_DIR', '/svetku_parvaldiba/backend/admin');
 spl_autoload_register(function ($class) {
     require_once (ROOT_DIR . 'backend/classes/' . $class . '.php');
 });
+
+date_default_timezone_set('Europe/Riga');

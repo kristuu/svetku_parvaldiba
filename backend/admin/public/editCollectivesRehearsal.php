@@ -1,7 +1,6 @@
 <?php
 require_once '../../core/init.php';
 require_once(ROOT_DIR . 'backend/includes/editFields.inc.php');
-require_once(ROOT_DIR . 'backend/includes/restrictionPopovers.inc.php');
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
@@ -12,6 +11,7 @@ require_once ROOT_DIR . 'backend/core/checkAgreement.php';
 
 $participant = new Participant();
 $colrehClass = new CollectivesRehearsals();
+$currentColreh = $colrehClass->findConnection($_GET['id']);
 $rehearsalClass = new Rehearsals();
 $categoryClass = new Category();
 $allRehearsals = $rehearsalClass->getAllRehearsals();
@@ -36,16 +36,17 @@ if (isset($_GET['errors'])) {
 <main class="container">
     <?php include ROOT_DIR . 'public/blocks/logoContainer.php'; ?>
     <div class="my-3 p-3 rounded shadow-sm section-div">
-        <h6 class="border-bottom pb-2 mb-0 fw-bold">JAUNA SAVIENOJUMA PIEVIENOŠANAS PANELIS</h6>
+        <h6 class="border-bottom pb-2 mb-0 fw-bold">SAVIENOJUMA PĀRVALDĪBAS PANELIS</h6>
         <div class="my-3 text-center">
-            <form class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/handlers/addHandlers/addCollectivesRehearsal.php" method="POST" novalidate>
+            <form class="w-75 row g-3 mt-3 mx-auto needs-validation" action="<?=BACKEND_DIR?>/handlers/updateHandlers/updateCollectivesRehearsal.php" method="POST" novalidate>
+                <input hidden name="colrehID" value="<?=$currentColreh->colrehID?>"/>
                 <div class="col-12">
                     <div class="input-group has-validation">
                         <label class="input-group-text font-title" for="RehearsalID">MĒĢINĀJUMS</label>
                         <select class="form-select font-default" id="RehearsalID" name="RehearsalID">
                             <?php
                             foreach ($allRehearsals as $rehearsal) {
-                                echo "<option class='font-default' value='$rehearsal->RehearsalID'>$rehearsal->RehearsalDesc $rehearsal->DanceName || $rehearsal->StartTime - $rehearsal->EndTime</option>";
+                                echo "<option class='font-default' value='$rehearsal->RehearsalID' " . ($rehearsal->RehearsalID === $currentColreh->RehearsalID ? 'selected' : '') . " >$rehearsal->RehearsalDesc $rehearsal->DanceName || $rehearsal->StartTime - $rehearsal->EndTime</option>";
                             }
                             ?>
                         </select>
@@ -57,14 +58,14 @@ if (isset($_GET['errors'])) {
                         <select class="form-select font-default" id="CategoryID" name="CategoryID">
                             <?php
                             foreach ($allCategories as $category) {
-                                echo "<option class='font-default' value='$category->CategoryID'>$category->CategoryName - $category->TypeName</option>";
+                                echo "<option class='font-default' value='$category->CategoryID' " . ($category->CategoryID === $currentColreh->CategoryID ? 'selected' : '') . ">$category->CategoryName - $category->TypeName</option>";
                             }
                             ?>
                         </select>
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <button type="submit" name="submitAdd" class="btn btn-outline-success w-100  font-title">SAGLABĀT</button>
+                    <button type="submit" name="submitEdit" class="btn btn-outline-success w-100 font-title">SAGLABĀT</button>
                 </div>
                 <div class="col-lg-12 text-start">
                     <?php
