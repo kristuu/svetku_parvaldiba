@@ -15,4 +15,13 @@ $pageNames = array(
     'participCollectives.php' => 'DALĪBNIEKI KOLEKTĪVOS',
     'addParticipCollective.php' => 'DALĪBNIEKA PIEVIENOŠANA KOLEKTĪVAM',
     'editParticipCollective.php' => 'DALĪBNIEKA SAISTĪJUMA REDIĢĒŠANA KOLEKTĪVĀ',
+    'dances.php' => 'DEJAS',
+    'addDance.php' => 'DEJAS PIEVIENOŠANA',
+    'editDance.php' => 'DEJAS DATU REDIĢĒŠANA',
+    'rehearsals.php' => 'MĒĢINĀJUMI',
+    'addRehearsal.php' => 'MĒĢINĀJUMA PIEVIENOŠANA',
+    'editRehearsal.php' => 'MĒĢINĀJUMA DATU REDIĢĒŠANA',
+    'collectivesRehearsals.php' => 'MĒĢINĀJUMU SAISTĪJUMS AR KOLEKTĪVU KATEGORIJĀM',
+    'addCollectivesRehearsals.php' => 'MĒĢINĀJUMA PIEVIENOŠANA KOLEKTĪVAM KATEGORIJĀ',
+    'editCollectivesRehearsals.php' => 'MĒĢINĀJUMA SAISTĪJUMA REDIĢĒŠANA KOLEKTĪVĀ KATEGORIJĀ',
 );
