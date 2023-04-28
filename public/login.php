@@ -53,9 +53,9 @@ if(isset($errorMessage)) {
         </div>
     </div>
 </header>
-<div class="div-logo m-auto">
-    <img class="logo-gars img-fluid" src="../resources/img/logo-rinda.svg"/>
-    <img class="logo-iss img-fluid" src="../resources/img/logo-kompakts.svg"/>
+<div class="div-logo">
+    <img class="logo-gars img-fluid m-auto" src="../resources/img/logo-rinda.svg"/>
+    <img class="logo-iss img-fluid m-auto" src="../resources/img/logo-kompakts.svg"/>
 </div>
 <div id="login-section" class="container-fluid">
     <div class="login-div m-auto">

@@ -90,7 +90,7 @@ $colrehClass = new CollectivesRehearsals();
                             <ul class="list-group list-group-flush"></ul>
                             <div class="card-body bg-dzervenu-sartais text-linu-gaisais">
                                 <h6 class="card-title fw-bold">HOREOGRĀFS</h6>
-                                <p class="card-text"><?=$rehearsal->FName . ' ' . $rehearsal->LName?></p>
+                                <p class="card-text"><?=((isset($rehearsal->FName) && isset($rehearsal->LName)) ? ($rehearsal->FName . ' ' . $rehearsal->LName) : 'Nav norādīts')?></p>
                             </div>
                         </div>
                     </div>

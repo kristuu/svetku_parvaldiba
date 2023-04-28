@@ -33,7 +33,7 @@ class Collective
     }
 
     public function getCollectivesRehearsals(int $collectiveID) {
-        $data = $this->_DB->get('collectives', array(array('CollectiveID', '=', $collectiveID)), array(array('INNER', 'collectivesrehearsals', 'collectives.CategoryID', 'collectivesrehearsals.CategoryID'), array('INNER', 'rehearsals', 'rehearsals.RehearsalID', 'collectivesrehearsals.RehearsalID'), array('INNER', 'categories', 'collectivesrehearsals.CategoryID', 'categories.CategoryID'), array('INNER', 'participants', 'rehearsals.ChoreographID', 'participants.ParticipantID'), array('LEFT', 'dances', 'dances.DanceID', 'rehearsals.DanceID')));
+        $data = $this->_DB->get('collectives', array(array('CollectiveID', '=', $collectiveID)), array(array('INNER', 'collectivesrehearsals', 'collectives.CategoryID', 'collectivesrehearsals.CategoryID'), array('INNER', 'rehearsals', 'rehearsals.RehearsalID', 'collectivesrehearsals.RehearsalID'), array('INNER', 'categories', 'collectivesrehearsals.CategoryID', 'categories.CategoryID'), array('LEFT', 'participants', 'rehearsals.ChoreographID', 'participants.ParticipantID'), array('LEFT', 'dances', 'dances.DanceID', 'rehearsals.DanceID')));
         if ($data->getCount()) {
             $this->_data = $data->getResults();
             return $this->_data;

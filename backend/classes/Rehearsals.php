@@ -3,7 +3,7 @@
 class Rehearsals
 {
     private Dbh $_DB;
-    private array $_data;
+    private $_data;
 
     public function __construct($user = null)
     {
