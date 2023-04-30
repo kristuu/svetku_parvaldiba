@@ -22,14 +22,13 @@ if (isset($_POST)) {
 
         $validate = new Validate();
 
-        $validate->isEmpty($fields[$key], $value);
-        $data[0][$key] = $validate->cleanInput($value);
-
         // fields that are immune to special character check
         $immuneFields = array("Email", "Password", "Choreograph", "Organiser");
 
         // Check if any other field contains special characters, return the user
         if (!in_array($key, $immuneFields)) {
+            $validate->isEmpty($fields[$key], $value);
+            $data[0][$key] = $validate->cleanInput($value);
             $validate->hasNoSpecialChar($fields[$key], $value);
         }
 
