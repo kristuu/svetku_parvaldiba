@@ -52,6 +52,18 @@ class ParticipCollectives
         }
     }
 
+    public function checkManager($participantID = null, $collectiveID = null) {
+        if($participantID) {
+            $field = 'ParticipantID';
+            $data = $this->_DB->get('participcollectives', array(array($field, '=', $participantID), array('CollectiveID', '=', $collectiveID), array('Manager', '=', 1)));
+            if ($data->getCount()) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
     public function getParticipCollective(int $id) {
         if ($id) {
             $field = 'ID';

@@ -17,6 +17,9 @@ if (isset($_POST["submitEdit"])) {
         'Organiser' => isset($_POST["Organiser"])
     ));
 
+    var_dump($_POST);
+    die();
+
     if (empty($_POST["Password"])) {
         unset($data[0]["Password"]);
     }

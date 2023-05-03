@@ -34,7 +34,7 @@ $colrehClass = new CollectivesRehearsals();
                 <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
                     <div class="d-flex justify-content-between">
                         <strong class="text-gray-dark"><?=$collective->CollectiveName . ($collective->MainCollective ? ' | GALVENAIS' : ''); ?></strong>
-                        <?=($collective->Manager) ? '<a href="#">Pārvaldīt</a>' : ''?>
+                        <?=($collective->Manager) ? '<a href="' . ADMIN_DIR . '/public/editCollective.php?id=' . $collective->CollectiveID . '">Pārvaldīt</a>' : ''?>
                     </div>
                     <span class="d-block">
                         Kolektīva vadītājs:

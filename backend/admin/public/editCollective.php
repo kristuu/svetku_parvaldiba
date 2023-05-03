@@ -10,11 +10,14 @@ if (!isset($_SESSION["user_id"])) {
 require_once ROOT_DIR . 'backend/core/checkAgreement.php';
 
 $participant = new Participant();
+$participantID = $participant->findUser()->ParticipantID;
 $collective = new Collective();
 $collectiveData = $collective->findCollective($_GET['id']);
+$participCollectives = new ParticipCollectives();
+$managerCheck = $participCollectives->checkManager($participantID, $_GET['id']);
 
 // Check if the user is an administrator
-if (!$participant->findUser()->Organiser) {
+if (!$participant->findUser()->Organiser && !$managerCheck) {
     header("Location: ". PUBLIC_DIR ."/index.php");
 }
 

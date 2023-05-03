@@ -111,9 +111,16 @@ if (isset($_POST["submitEdit"])) {
 
 
     // Going back to front page
-    header("Location: " . ADMIN_DIR . "/public/collectives.php");
+    $participant = new Participant();
+    $participCollectives = new ParticipCollectives();
+    $managerCheck = $participCollectives->checkManager($participant->findUser()->ParticipantID, $collectiveID);
 
-
+    // Check if the user is an administrator
+    if ($participant->findUser()->Organiser) {
+        header("Location: " . ADMIN_DIR . "/public/collectives.php");
+    } elseif ($managerCheck) {
+        header("Location: " . PUBLIC_DIR . "/index.php");
+    }
 }
 
 
