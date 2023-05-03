@@ -17,9 +17,6 @@ if (isset($_POST["submitEdit"])) {
         'Organiser' => isset($_POST["Organiser"])
     ));
 
-    var_dump($_POST);
-    die();
-
     if (empty($_POST["Password"])) {
         unset($data[0]["Password"]);
     }
@@ -66,7 +63,9 @@ if (isset($_POST["submitEdit"])) {
         exit;
     }
 
-    $data[0]["Password"] = password_hash($_POST["Password"], PASSWORD_DEFAULT);
+    if(isset($data[0]["Password"])) {
+        $data[0]["Password"] = password_hash($data[0]["Password"], PASSWORD_DEFAULT);
+    }
 
     // Update database query
     $participant = new Participant();
